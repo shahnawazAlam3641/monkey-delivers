@@ -33,7 +33,7 @@ async function getCuisines(){
 
 if(cuisines){
 
-
+  console.log(cuisines)
   const {header:{title}, imageGridCards:{info}} = cuisines?.data?.cards[0]?.card?.card 
 
 
