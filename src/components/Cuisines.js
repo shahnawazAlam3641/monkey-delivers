@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {MAIN_API, DEV_API, CUISINE_IMG_CDN} from '../constants'
+import {MAIN_API, CUISINE_IMG_CDN} from '../constants'
 import RestaurantChains from './RestaurantChains'
 
 

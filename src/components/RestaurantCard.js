@@ -10,7 +10,7 @@ return (
 
 
   
-    <div className='cursor-pointer flex flex-col mr-auto w-56 truncate transition-all duration-500 hover:scale-105'>
+    <div className='cursor-pointer flex flex-col w-56 truncate transition-all duration-500 hover:scale-105'>
     
         <img className='w-56 h-36 object-cover rounded-lg' src={claudinaryImgCDN+cloudinaryImageId}/>
         <p className='font-bold text-ellipsis'>{name}</p>

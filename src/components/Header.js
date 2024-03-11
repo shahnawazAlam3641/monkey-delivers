@@ -7,11 +7,11 @@ const Header = () => {
 
       <div className='flex items-center '>
         <ul className='flex items-center text-white'>
-          <li className='m-3'>Home</li>
-          <li className='m-3'>Search</li>
-          <li className='m-3'>Grocery</li>
-          <li className='m-3'>About Us</li>
-          <li className='m-3'>Cart</li>
+          <li className='m-3 cursor-pointer'>Home</li>
+          <li className='m-3 cursor-pointer'>Search</li>
+          <li className='m-3 cursor-pointer'>Grocery</li>
+          <li className='m-3 cursor-pointer'>About Us</li>
+          <li className='m-3 cursor-pointer'>Cart</li>
         </ul>
 
         <button className='bg-yellow-400 p-2 rounded-md m-3 text-[#171a29]'>Login</button>
