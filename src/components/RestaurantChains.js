@@ -43,7 +43,7 @@ console.log(cuisine?.data?.cards[2]?.card?.card?.title)
 
   return (
   
-  <div className='flex flex-col '>
+  <div className='flex flex-col scroll-smooth' id='restaurants'>
     <div className='max-w-[85%] mx-auto my-10 text-[#171a29] font-bold text-3xl'>{cuisine?.data?.cards[2]?.card?.card?.title}</div>
     <div className='mx-auto flex gap-3'>
       <button className={`border rounded-full shadow-sm py-2 px-5  ${all ? 'bg-gray-300' : ''}`} onClick={handleAll}>All</button>

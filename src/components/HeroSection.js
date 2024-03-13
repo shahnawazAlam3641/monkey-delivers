@@ -9,10 +9,10 @@ const HeroSection = () => {
             <br/>
             <p className='text-[#171a29] font-semibold'>Discover the ultimate convinience with Monkey Delivers. Experience speed and variety with Monkey Delivers!</p>
             <br/><br/>
-            <button className='bg-[#171a29] text-slate-50 px-4 py-2 rounded-full'>Explore Restaurants</button>
+            <a href='#restaurants' className='bg-[#171a29] text-slate-50 px-4 py-2 rounded-full'>Explore Restaurants</a>
         </div>
 
-        <img src={hero_img} className='w-[40rem] h-[40rem] scale-x-[-1] mt-[-2rem] -z-10'/>
+        <img src={hero_img} className='scroll-smooth w-[40rem] h-[40rem] scale-x-[-1] mt-[-2rem] -z-10'/>
     </div>
   )
 }

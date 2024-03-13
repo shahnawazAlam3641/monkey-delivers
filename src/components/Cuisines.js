@@ -22,14 +22,17 @@ useEffect(()=>{
 },[])
 
 async function getCuisines(){
-  console.log('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
-  const response = await fetch('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
+  // console.log('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
+  const response = await fetch('https://thingproxy.freeboard.io/fetch/' + MAIN_API)
+
+  // const response = await fetch('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
   // const response = await fetch(DEV_API)
   const json = await response.json()
+  console.log(json)
   setCuisines(json)
 }
 
-
+console.log(cuisines)
 
 if(cuisines){
 
