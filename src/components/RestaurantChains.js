@@ -1,9 +1,12 @@
 import React, {useState} from 'react'
 import RestaurantCard from './restaurantCard'
+import { Link } from 'react-router-dom'
 import { claudinaryImgCDN } from '../constants'
 
 
 const RestaurantChains = ({cuisine}) => {
+
+  
 
   const [all, setAll] = useState(true)
     const [rating, setRating] = useState(false)
@@ -69,21 +72,22 @@ console.log(cuisine?.data?.cards[2]?.card?.card?.title)
 
       {all &&  restaurants.map((restaurant)=>{
         
-      return <RestaurantCard key={restaurant?.info?.id} restaurant={restaurant}/>
+        
+      return <Link to={'/restaurant/' + restaurant?.info?.id} key={restaurant?.info?.id}><RestaurantCard  restaurant={restaurant}/></Link>
       })}
 
       {rating && restaurants.filter((restaurant)=>{ 
        return restaurant?.info?.avgRating >= 4
         }).map((restaurant)=>{
         
-      return <RestaurantCard key={restaurant?.info?.id} restaurant={restaurant}/>
+      return <Link to={'/restaurant/' + restaurant?.info?.id} key={restaurant?.info?.id}><RestaurantCard  restaurant={restaurant}/></Link>
       })}
 
       {fast && restaurants.filter((restaurant)=>{ 
        return restaurant?.info?.sla?.deliveryTime <= 25
         }).map((restaurant)=>{
         
-      return <RestaurantCard key={restaurant?.info?.id} restaurant={restaurant}/>
+      return <Link to={'/restaurant/' + restaurant?.info?.id} key={restaurant?.info?.id}><RestaurantCard  restaurant={restaurant}/></Link>
       })}
           
     

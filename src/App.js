@@ -5,9 +5,11 @@ import Body from './components/Body';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Search from './components/Search';
 import Grocery from './components/Grocery';
-import About from './components/About';
+import Help from './components/Help';
 import Cart from './components/Cart';
 import Login from './components/Login';
+
+import RestaurantMenu from './components/RestaurantMenu';
 const App = ()=>{
     return (
         <div>
@@ -37,7 +39,7 @@ const appRouter = createBrowserRouter([
             },
             {
                 path:'/about',
-                element:<About/>
+                element:<Help/>
             },
             {
                 path:'/cart',
@@ -46,6 +48,10 @@ const appRouter = createBrowserRouter([
             {
                 path:'/login',
                 element:<Login/>
+            },
+            {
+                path:'/restaurant/:resId',
+                element:<RestaurantMenu/>
             },
         ]
     }

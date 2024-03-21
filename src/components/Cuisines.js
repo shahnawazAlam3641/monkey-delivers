@@ -28,15 +28,13 @@ async function getCuisines(){
   // const response = await fetch('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
   // const response = await fetch(DEV_API)
   const json = await response.json()
-  console.log(json)
+  
   setCuisines(json)
 }
 
-console.log(cuisines)
 
 if(cuisines){
 
-  console.log(cuisines)
   const {header:{title}, imageGridCards:{info}} = cuisines?.data?.cards[0]?.card?.card 
 
 
@@ -47,6 +45,7 @@ if(cuisines){
 
         <div className='flex overflow-x-scroll'>
           {info.map((cuisine)=>{
+
             return <img className='w-40' key={cuisine.id} src={CUISINE_IMG_CDN+cuisine.imageId} />
           })}
         </div>
