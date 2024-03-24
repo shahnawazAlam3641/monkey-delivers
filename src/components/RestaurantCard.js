@@ -1,5 +1,7 @@
 import React from 'react'
-import { claudinaryImgCDN } from '../constants'
+
+
+import { claudinaryImgCDN } from '../utils/constants'
 
 const RestaurantCard = ({restaurant}) => {
 

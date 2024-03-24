@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { RESTAURANT_MENU_API, claudinaryImgCDN } from '../constants'
+import useRestaurantMenu from '../utils/useRestaurantMenu'
+import { RESTAURANT_MENU_API, claudinaryImgCDN } from '../utils/constants'
 
 const RestaurantMenu = () => {
 
-  const [menu, setMenu] = useState(null)
-
+  
   const {resId} = useParams()
-  console.log(resId)
 
-  useEffect(()=>{
+  const menu = useRestaurantMenu(resId)
 
-    getMenu()
+  // const [menu, setMenu] = useState(null)
 
-  },[])
 
-  const getMenu = async ()=>{
-    const response = await fetch('https://thingproxy.freeboard.io/fetch/' + RESTAURANT_MENU_API + resId)
-    const menu = await response.json()
-    setMenu(menu)
-    // console.log(menu)
-  }
+  // useEffect(()=>{
+
+  //   getMenu()
+
+  // },[])
+
+  // const getMenu = async ()=>{
+  //   const response = await fetch('https://thingproxy.freeboard.io/fetch/' + RESTAURANT_MENU_API + resId)
+  //   const menu = await response.json()
+  //   setMenu(menu)
+  //   // console.log(menu)
+  // }
+
+  console.log(menu)
 
   if(!menu) return <h1>Loading MEnu</h1>
 

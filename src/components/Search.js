@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import { PRE_SEARCH_API } from '../constants'
-import { claudinaryImgCDN } from '../constants'
+import { PRE_SEARCH_API } from '../utils/constants'
+import { claudinaryImgCDN } from '../utils/constants'
 // import { SEARCH_SUGG_API } from '../constants'
 
 const Search = () => {

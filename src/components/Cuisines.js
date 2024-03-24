@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import {MAIN_API, CUISINE_IMG_CDN} from '../constants'
+import {MAIN_API, CUISINE_IMG_CDN} from '../utils/constants'
 import RestaurantChains from './RestaurantChains'
+import useOnlineStatus from '../utils/useOnlineStatus'
 
 
 const Cuisines = () => {
 
     const [cuisines, setCuisines] = useState(null)
 
-
+const onlineStatus = useOnlineStatus()
 
    
 
 useEffect(()=>{
 
-    
     getCuisines()
-
-
-
 
 },[])
 
@@ -32,8 +29,15 @@ async function getCuisines(){
   setCuisines(json)
 }
 
+console.log(onlineStatus)
 
-if(cuisines){
+if(onlineStatus === false){
+  return <h1>uh ohhh... looks like youre offline</h1>
+}
+else if(!cuisines){
+   return <h1>Loading.................</h1> 
+}
+else if(cuisines){
 
   const {header:{title}, imageGridCards:{info}} = cuisines?.data?.cards[0]?.card?.card 
 
@@ -59,8 +63,6 @@ if(cuisines){
     <RestaurantChains cuisine={cuisines}/>
     </>
   )
-}else{
-  return <h1>Loading.................</h1>
 }
     
 

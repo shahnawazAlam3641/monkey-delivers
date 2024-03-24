@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import RestaurantCard from './restaurantCard'
 import { Link } from 'react-router-dom'
-import { claudinaryImgCDN } from '../constants'
+import { claudinaryImgCDN } from '../utils/constants'
 
 
 const RestaurantChains = ({cuisine}) => {
