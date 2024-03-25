@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import  ReactDOM  from 'react-dom/client';
 import Header from './components/HEader';
 import Body from './components/Body';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Search from './components/Search';
-import Grocery from './components/Grocery';
+// import Grocery from './components/Grocery';
 import Help from './components/Help';
 import Cart from './components/Cart';
 import Login from './components/Login';
+
+
+const Grocery = lazy(()=> import('./components/Grocery'))
 
 import RestaurantMenu from './components/RestaurantMenu';
 const App = ()=>{
@@ -35,7 +38,7 @@ const appRouter = createBrowserRouter([
             },
             {
                 path:'/grocery',
-                element:<Grocery/>
+                element: <Suspense><Grocery/></Suspense> 
             },
             {
                 path:'/about',

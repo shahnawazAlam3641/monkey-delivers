@@ -1,76 +1,70 @@
-import React, { useEffect, useState } from 'react'
-import {MAIN_API, CUISINE_IMG_CDN} from '../utils/constants'
-import RestaurantChains from './RestaurantChains'
-import useOnlineStatus from '../utils/useOnlineStatus'
-
+import React, { useEffect, useState } from "react";
+import { MAIN_API, CUISINE_IMG_CDN } from "../utils/constants";
+import RestaurantChains from "./RestaurantChains";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Cuisines = () => {
+  const [cuisines, setCuisines] = useState(null);
 
-    const [cuisines, setCuisines] = useState(null)
+  const onlineStatus = useOnlineStatus();
 
-const onlineStatus = useOnlineStatus()
+  useEffect(() => {
+    getCuisines();
+  }, []);
 
-   
+  async function getCuisines() {
+    // console.log('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
+    const response = await fetch(
+      "https://thingproxy.freeboard.io/fetch/" + MAIN_API
+    );
 
-useEffect(()=>{
+    // const response = await fetch('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
+    // const response = await fetch(DEV_API)
+    const json = await response.json();
 
-    getCuisines()
+    setCuisines(json);
+  }
 
-},[])
+  // console.log(onlineStatus);
 
-async function getCuisines(){
-  // console.log('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
-  const response = await fetch('https://thingproxy.freeboard.io/fetch/' + MAIN_API)
+  if (onlineStatus === false) {
+    return <h1>uh ohhh... looks like youre offline</h1>;
+  } else if (!cuisines) {
+    return <h1>Loading.................</h1>;
+  } else if (cuisines) {
+    // console.log(cuisines?.data?.cards[0]?.card?.card);
 
-  // const response = await fetch('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
-  // const response = await fetch(DEV_API)
-  const json = await response.json()
-  
-  setCuisines(json)
-}
+    const {
+      header: { title },
+      imageGridCards: { info },
+    } = cuisines?.data?.cards[0]?.card?.card;
 
-console.log(onlineStatus)
+    return (
+      <>
+        <div className="max-w-[85%] mx-auto">
+          <h2 className="text-[#171a29] text-2xl font-semibold">{title}</h2>
 
-if(onlineStatus === false){
-  return <h1>uh ohhh... looks like youre offline</h1>
-}
-else if(!cuisines){
-   return <h1>Loading.................</h1> 
-}
-else if(cuisines){
-
-  const {header:{title}, imageGridCards:{info}} = cuisines?.data?.cards[0]?.card?.card 
-
-
-  return (
-    <>
-    <div className='max-w-[85%] mx-auto' >
-        <h2 className='text-[#171a29] text-2xl font-semibold'>{title}</h2>
-
-        <div className='flex overflow-x-scroll'>
-          {info.map((cuisine)=>{
-
-            return <img className='w-40' key={cuisine.id} src={CUISINE_IMG_CDN+cuisine.imageId} />
-          })}
+          <div className="flex overflow-x-scroll">
+            {info.map((cuisine) => {
+              return (
+                <img
+                  className="w-40"
+                  key={cuisine.id}
+                  src={CUISINE_IMG_CDN + cuisine.imageId}
+                />
+              );
+            })}
+          </div>
         </div>
-    </div>
+        <br /> <br />
+        <div className="w-[85%] h-[2px] bg-[#F0F0F5] mx-auto"></div>
+        <RestaurantChains cuisine={cuisines} />
+      </>
+    );
+  }
+};
 
-    <br/>    <br/>
-
-
-    <div className='w-[85%] h-[2px] bg-[#F0F0F5] mx-auto'></div>
-
-    <RestaurantChains cuisine={cuisines}/>
-    </>
-  )
-}
-    
-
-  
-}
-
-export default Cuisines
-
+export default Cuisines;
 
 // import React, { useEffect, useState } from 'react';
 // import { MAIN_API } from '../constants';

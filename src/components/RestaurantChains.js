@@ -1,16 +1,15 @@
-import React, {useState} from 'react'
-import RestaurantCard from './restaurantCard'
-import { Link } from 'react-router-dom'
-import { claudinaryImgCDN } from '../utils/constants'
+import React, { useState } from "react";
+import RestaurantCard, { DiscountedRestaurant } from "./restaurantCard";
+import { Link } from "react-router-dom";
+import { claudinaryImgCDN } from "../utils/constants";
 
+const RestaurantChains = ({ cuisine }) => {
+  const [all, setAll] = useState(true);
+  const [rating, setRating] = useState(false);
+  const [fast, setFast] = useState(false);
 
-const RestaurantChains = ({cuisine}) => {
-
-  
-
-  const [all, setAll] = useState(true)
-    const [rating, setRating] = useState(false)
-  const [fast, setFast] = useState(false)
+  // const RestaurantWithDiscount = DiscountedRestaurant(RestaurantCard);
+  // console.log(RestaurantWithDiscount);
 
   const handleAll = () => {
     if (!all) {
@@ -36,27 +35,44 @@ const RestaurantChains = ({cuisine}) => {
     }
   };
 
-
-
-  
-
-
-  const {restaurants} = cuisine?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-console.log(cuisine?.data?.cards[2]?.card?.card?.title)
+  const { restaurants } =
+    cuisine?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle;
+  // console.log(cuisine?.data?.cards[2]?.card?.card?.title)
 
   return (
-  
-  <div className='flex flex-col scroll-smooth' id='restaurants'>
-    <div className='max-w-[85%] mx-auto my-10 text-[#171a29] font-bold text-3xl'>{cuisine?.data?.cards[2]?.card?.card?.title}</div>
-    <div className='mx-auto flex gap-3'>
-      <button className={`border rounded-full shadow-sm py-2 px-5  ${all ? 'bg-gray-300' : ''}`} onClick={handleAll}>All</button>
-      <button className={`border rounded-full shadow-sm p-2 ${rating ? 'bg-gray-300' : ''}`} onClick={handleRating}>Ratings 4.0+</button>
-      <button className={`border rounded-full shadow-sm p-2 ${fast ? 'bg-gray-300' : ''}`} onClick={handleFast}>Fast Delivery</button>
-    </div>
+    <div className="flex flex-col scroll-smooth" id="restaurants">
+      <div className="max-w-[85%] mx-auto my-10 text-[#171a29] font-bold text-3xl">
+        {cuisine?.data?.cards[2]?.card?.card?.title}
+      </div>
+      <div className="mx-auto flex gap-3">
+        <button
+          className={`border rounded-full shadow-sm py-2 px-5  ${
+            all ? "bg-gray-300" : ""
+          }`}
+          onClick={handleAll}
+        >
+          All
+        </button>
+        <button
+          className={`border rounded-full shadow-sm p-2 ${
+            rating ? "bg-gray-300" : ""
+          }`}
+          onClick={handleRating}
+        >
+          Ratings 4.0+
+        </button>
+        <button
+          className={`border rounded-full shadow-sm p-2 ${
+            fast ? "bg-gray-300" : ""
+          }`}
+          onClick={handleFast}
+        >
+          Fast Delivery
+        </button>
+      </div>
 
-    <div className='flex max-w-[80%] mx-auto  gap-[3.8rem] flex-wrap mt-10 t'>
-       
-    {/* {if(all){
+      <div className="flex max-w-[80%] mx-auto  gap-[3.8rem] flex-wrap mt-10 t">
+        {/* {if(all){
       restaurants.map((restaurant)=>{
         console.log(all)
         console.log(restaurant)
@@ -70,31 +86,58 @@ console.log(cuisine?.data?.cards[2]?.card?.card?.title)
         })
       }} */}
 
-      {all &&  restaurants.map((restaurant)=>{
-        
-        
-      return <Link to={'/restaurant/' + restaurant?.info?.id} key={restaurant?.info?.id}><RestaurantCard  restaurant={restaurant}/></Link>
-      })}
+        {all &&
+          restaurants.map((restaurant) => {
+            return (
+              <Link
+                to={"/restaurant/" + restaurant?.info?.id}
+                key={restaurant?.info?.id}
+              >
+                {/* {restaurant?.info?.aggregatedDiscountInfoV3 ? (
+                  <RestaurantWithDiscount restaurant={restaurant} />
+                ) : (
+                  <RestaurantCard restaurant={restaurant} />
+                )} */}
 
-      {rating && restaurants.filter((restaurant)=>{ 
-       return restaurant?.info?.avgRating >= 4
-        }).map((restaurant)=>{
-        
-      return <Link to={'/restaurant/' + restaurant?.info?.id} key={restaurant?.info?.id}><RestaurantCard  restaurant={restaurant}/></Link>
-      })}
+                <RestaurantCard restaurant={restaurant} />
+              </Link>
+            );
+          })}
 
-      {fast && restaurants.filter((restaurant)=>{ 
-       return restaurant?.info?.sla?.deliveryTime <= 25
-        }).map((restaurant)=>{
-        
-      return <Link to={'/restaurant/' + restaurant?.info?.id} key={restaurant?.info?.id}><RestaurantCard  restaurant={restaurant}/></Link>
-      })}
-          
-    
-</div>
-</div>
-    
-  )
-}
+        {rating &&
+          restaurants
+            .filter((restaurant) => {
+              return restaurant?.info?.avgRating >= 4;
+            })
+            .map((restaurant) => {
+              return (
+                <Link
+                  to={"/restaurant/" + restaurant?.info?.id}
+                  key={restaurant?.info?.id}
+                >
+                  <RestaurantCard restaurant={restaurant} />
+                </Link>
+              );
+            })}
 
-export default RestaurantChains
+        {fast &&
+          restaurants
+            .filter((restaurant) => {
+              return restaurant?.info?.sla?.deliveryTime <= 25;
+            })
+            .map((restaurant) => {
+              return (
+                <Link
+                  to={"/restaurant/" + restaurant?.info?.id}
+                  key={restaurant?.info?.id}
+                >
+                  <RestaurantCard restaurant={restaurant} />
+                </Link>
+              );
+            })}
+      </div>
+    </div>
+  );
+};
+
+export default RestaurantChains;
