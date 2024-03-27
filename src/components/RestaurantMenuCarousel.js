@@ -4,7 +4,7 @@ import { claudinaryImgCDN } from "../utils/constants";
 const RestaurantMenuCarousel = ({ menuType }) => {
   return menuType?.card?.card?.carousel.map((item) => {
     return (
-      <div className="bg-red-500">
+      <div key={item?.bannerId} className="bg-red-500">
         <img
           className="w-16"
           src={claudinaryImgCDN + item?.dish?.info?.imageId}

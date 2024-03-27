@@ -1,30 +1,25 @@
-import React from 'react'
-import {useState, useEffect} from 'react'
-import { RESTAURANT_MENU_API } from './constants'
+import React from "react";
+import { useState, useEffect } from "react";
+import { RESTAURANT_MENU_API } from "./constants";
 
 const useRestaurantMenu = (resId) => {
-  
-    const [menu, setMenu] = useState(null)
+  const [menu, setMenu] = useState(null);
 
+  useEffect(() => {
+    getMenu();
+  }, []);
 
-  useEffect(()=>{
-    getMenu()
-  },[])
-
-  const getMenu = async ()=>{
-
+  const getMenu = async () => {
     // console.log('menu effect called')
-    const response = await fetch('https://thingproxy.freeboard.io/fetch/' + RESTAURANT_MENU_API + resId)
-    
-    const data = await response.json()
-    console.log('getmenu' , data)
-    setMenu(data)
+    const response = await fetch(
+      "https://thingproxy.freeboard.io/fetch/" + RESTAURANT_MENU_API + resId
+    );
 
-    
-  }
+    const data = await response.json();
+    setMenu(data);
+  };
 
-  return menu
+  return menu;
+};
 
-}
-
-export default useRestaurantMenu
+export default useRestaurantMenu;

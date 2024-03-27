@@ -17,7 +17,10 @@ const RestaurantMenuItemCards = ({ menuType }) => {
 
       {menuType?.card?.card?.itemCards.map((item) => {
         return (
-          <div className={`bg-green-500 ${accordianOpen ? "flex" : "hidden"}`}>
+          <div
+            key={item?.card?.info?.id}
+            className={`bg-green-500 ${accordianOpen ? "flex" : "hidden"}`}
+          >
             <div>
               <p>{item?.card?.info?.name}</p>
               <p>

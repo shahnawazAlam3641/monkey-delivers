@@ -53,24 +53,25 @@ const RestaurantMenu = () => {
     <>
       <RestaurantMenuHeader menu={menu} />
 
-      {menu?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.map(
+      {menu?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.map(
         (menuType, index) => {
           return index > 0 ? (
             <>
+              {/* {console.log("menuType", menuType)} */}
               <div>
                 {menuType?.card?.card?.itemCards ? (
                   <RestaurantMenuItemCards
-                    className="hidden"
+                    key={menuType?.card?.card?.title}
                     menuType={menuType}
                   />
                 ) : menuType?.card?.card?.carousel ? (
                   <RestaurantMenuCarousel
-                    className="hidden"
+                    key={menuType?.card?.card?.title}
                     menuType={menuType}
                   />
                 ) : menuType?.card?.card?.categories ? (
                   <RestaurantMenuCategories
-                    className="hidden"
+                    key={menuType?.card?.card?.title}
                     menuType={menuType}
                   />
                 ) : null}
