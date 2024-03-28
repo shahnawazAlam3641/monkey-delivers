@@ -7,3 +7,5 @@ let obj = {
   "6q": false,
   "7q": true,
 };
+
+console.log(obj["1q"]);
