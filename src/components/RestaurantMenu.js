@@ -57,21 +57,21 @@ const RestaurantMenu = () => {
         (menuType, index) => {
           return index > 0 ? (
             <>
-              {/* {console.log("menuType", menuType)} */}
+              {console.log(menuType)}
               <div>
                 {menuType?.card?.card?.itemCards ? (
                   <RestaurantMenuItemCards
-                    key={menuType?.card?.card?.title}
+                    key={menuType?.card?.card?.title + index}
                     menuType={menuType}
                   />
                 ) : menuType?.card?.card?.carousel ? (
                   <RestaurantMenuCarousel
-                    key={menuType?.card?.card?.title}
+                    key={menuType?.card?.card?.title + index}
                     menuType={menuType}
                   />
                 ) : menuType?.card?.card?.categories ? (
                   <RestaurantMenuCategories
-                    key={menuType?.card?.card?.title}
+                    key={menuType?.card?.card?.title + index}
                     menuType={menuType}
                   />
                 ) : null}

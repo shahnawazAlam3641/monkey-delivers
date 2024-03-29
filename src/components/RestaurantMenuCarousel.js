@@ -9,9 +9,9 @@ const RestaurantMenuCarousel = ({ menuType }) => {
           console.log(item);
         }
         return (
-          <div className="relative m-4 min-w-72 " key={item?.bannerId}>
+          <div className="relative m-4 min-w-64 " key={item?.bannerId}>
             <img
-              className="rounded-lg w-72 h-72 object-cover"
+              className="rounded-lg w-64 h-72 object-cover"
               src={claudinaryImgCDN + item?.dish?.info?.imageId}
             />
             <div className="absolute top-0">
@@ -29,7 +29,7 @@ const RestaurantMenuCarousel = ({ menuType }) => {
                   item?.dish?.info?.price / 100}
               </p>
 
-              <button class="bg-green-400 px-4 py-2 m-4 rounded-md text-white hover:bg-green-600 hidden">
+              <button className="bg-green-400 px-4 py-2 m-4 rounded-md text-white hover:bg-green-600 hidden">
                 ADD
               </button>
 
