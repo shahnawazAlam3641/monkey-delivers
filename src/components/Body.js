@@ -1,14 +1,14 @@
-import React from 'react'
-import HeroSection from './HeroSection'
-import Cuisines from './Cuisines'
+import React from "react";
+import HeroSection from "./HeroSection";
+import Cuisines from "./Cuisines";
 
 const Body = () => {
   return (
     <>
-        <HeroSection/>
-        <Cuisines/>
+      <HeroSection />
+      <Cuisines />
     </>
-  )
-}
+  );
+};
 
-export default Body
+export default Body;

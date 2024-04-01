@@ -3,6 +3,7 @@ import { GROCERY_HOME_API, claudinaryImgCDN } from "../utils/constants";
 import GroceryNav from "./GroceryNav";
 import { claudinaryImgCDN } from "../utils/constants";
 import GroceryCategoryCard from "./GroceryCategoryCard";
+import { Link } from "react-router-dom";
 
 const Grocery = () => {
   const [groceryHome, setGroceryHome] = useState(null);
@@ -26,7 +27,9 @@ const Grocery = () => {
   const {
     widgetInfo: { title },
     data,
-  } = groceryHome?.data?.widgets[2];
+  } = groceryHome?.data?.widgets[1];
+
+  console.log(groceryHome?.data?.widgets[2]?.data);
 
   return (
     <div>
@@ -36,7 +39,11 @@ const Grocery = () => {
         <h1 className="text-lg font-semibold">{title}</h1>
         <div className="flex flex-wrap gap-4 ">
           {data.map((card) => {
-            return <GroceryCategoryCard card={card} />;
+            return (
+              <Link to={"/grocery/category/" + card?.displayName}>
+                <GroceryCategoryCard card={card} />
+              </Link>
+            );
           })}
         </div>
       </div>
