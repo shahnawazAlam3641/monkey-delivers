@@ -21,7 +21,8 @@ export const PRE_SEARCH_API =
 export const GROCERY_HOME_API =
   "https://www.swiggy.com/api/instamart/home?clientId=INSTAMART-APP";
 
-export const GROCERY_ITEM_API =
-  "https://www.swiggy.com/api/instamart/category-listing?custom_back=true&taxonomyType=All+Listing&categoryName=Fresh%20Fruits";
+export const GROCERY_CATEGORY_ITEM_API =
+  "https://www.swiggy.com/api/instamart/category-listing?custom_back=true&taxonomyType=All+Listing&categoryName=";
+// "https://www.swiggy.com/api/instamart/category-listing?custom_back=true&taxonomyType=All+Listing&categoryName=Fresh%20Fruits";
 // "https://www.swiggy.com/api/instamart/category-listing/filter?filterId=64a69b7cc6c4c700011466ee&storeId=1386096&type=All%20Listing";
 //data.widgets[1].data
