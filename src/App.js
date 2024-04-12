@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import Header from "./components/HEader";
+import Header from "./components/Header";
 import Body from "./components/Body";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Search from "./components/Search";
