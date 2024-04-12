@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import RestaurantCard, { DiscountedRestaurant } from "./restaurantCard";
+import RestaurantCard, { DiscountedRestaurant } from "./RestaurantCard";
 import { Link } from "react-router-dom";
 import { claudinaryImgCDN } from "../utils/constants";
 
