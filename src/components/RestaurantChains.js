@@ -36,7 +36,7 @@ const RestaurantChains = ({ cuisine }) => {
   };
 
   const { restaurants } =
-    cuisine?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle;
+    cuisine?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle;
   // console.log(cuisine?.data?.cards[2]?.card?.card?.title)
 
   return (

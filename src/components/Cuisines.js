@@ -14,9 +14,10 @@ const Cuisines = () => {
 
   async function getCuisines() {
     // console.log('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
-    const response = await fetch(
-      "https://thingproxy.freeboard.io/fetch/" + MAIN_API
-    );
+    // const response = await fetch(
+    //   "https://thingproxy.freeboard.io/fetch/" + MAIN_API
+    // );
+    const response = await fetch(MAIN_API);
 
     // const response = await fetch('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
     // const response = await fetch(DEV_API)
@@ -32,7 +33,7 @@ const Cuisines = () => {
   } else if (!cuisines) {
     return <h1>Loading.................</h1>;
   } else if (cuisines) {
-    // console.log(cuisines?.data?.cards[0]?.card?.card);
+    console.log(cuisines);
 
     const {
       header: { title },

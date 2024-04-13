@@ -11,9 +11,10 @@ const useRestaurantMenu = (resId) => {
 
   const getMenu = async () => {
     // console.log('menu effect called')
-    const response = await fetch(
-      "https://thingproxy.freeboard.io/fetch/" + RESTAURANT_MENU_API + resId
-    );
+    // const response = await fetch(
+    //   "https://thingproxy.freeboard.io/fetch/" + RESTAURANT_MENU_API + resId
+    // );
+    const response = await fetch(RESTAURANT_MENU_API + resId);
 
     const data = await response.json();
     setMenu(data);
