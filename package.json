@@ -2,10 +2,10 @@
   "name": "monkey-delivers",
   "version": "1.0.0",
   "description": "Discover the ultimate convinience with Monkey Delivers, a dual section website for swift deliveries. Satisfy your cravings with our seamless integration of Swiggys's API for online food delivery. Need groceries fast? Our Instamart API ensures your essentials are at your door in just 9minutes. Experience speed and variety with Monkey Delivers!",
-  "main": "App.js",
+  
   "scripts": {
-    "start": "parcel ./index.html",
-    "build": "parcel build ./src/App.js",
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "keywords": [
