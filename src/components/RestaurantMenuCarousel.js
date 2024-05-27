@@ -1,5 +1,6 @@
 import React from "react";
 import { claudinaryImgCDN } from "../utils/constants";
+import FoodBtn from "./FoodBtn";
 
 const RestaurantMenuCarousel = ({ menuType }) => {
   return (
@@ -33,7 +34,9 @@ const RestaurantMenuCarousel = ({ menuType }) => {
                 ADD
               </button>
 
-              <div className="m-4 flex items-center  bg-white justify-center rounded-md">
+              <FoodBtn item={item} />
+
+              {/* <div className="m-4 flex items-center  bg-white justify-center rounded-md">
                 <button className="p-3 text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-l-md transition-all">
                   -
                 </button>
@@ -43,7 +46,7 @@ const RestaurantMenuCarousel = ({ menuType }) => {
                 <button className="p-3 text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-r-md transition-all">
                   +
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         );

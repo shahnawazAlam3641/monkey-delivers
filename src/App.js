@@ -8,6 +8,8 @@ import Search from "./components/Search";
 import Help from "./components/Help";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 const GroceryCategoryItems = lazy(() =>
@@ -18,10 +20,12 @@ import RestaurantMenu from "./components/RestaurantMenu";
 // import GroceryCategoryItems from "./components/GroceryCategoryItems";
 const App = () => {
   return (
-    <div>
-      <Header />
-      <Outlet />
-    </div>
+    <Provider store={appStore}>
+      <div>
+        <Header />
+        <Outlet />
+      </div>
+    </Provider>
   );
 };
 

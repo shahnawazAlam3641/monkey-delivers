@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { claudinaryImgCDN } from "../utils/constants";
+import FoodBtn from "./FoodBtn";
+import { useDispatch } from "react-redux";
 
 const RestaurantMenuCategories = ({ menuType }) => {
+  // const [itemCount, setItemCount] = useState(0);
+
+  // const dispatch = useDispatch();
   // const [accordianOpen, setAccordianOpen] = useState(false);
 
   const [categoryAccordianOpen, setCategoryAccordianOpen] = useState({});
@@ -84,7 +89,7 @@ const RestaurantMenuCategories = ({ menuType }) => {
               </svg>
             </div>
 
-            <div className={`${isOpen ? "block" : "hidden"}`}>
+            <div className={`${isOpen ? "block" : "hidden"} `}>
               {categoryItem?.itemCards.map((item) => {
                 return (
                   //here that copy sent
@@ -179,7 +184,14 @@ const RestaurantMenuCategories = ({ menuType }) => {
                         <button className="bg-green-400 px-5 py-1  hidden rounded-md text-white shadow-lg hover:bg-green-600 ">
                           ADD
                         </button>
-                        <div className=" flex items-center   bg-white justify-center rounded-md shadow-lg  ">
+
+                        <FoodBtn
+                          item={item}
+                          // itemCount={itemCount}
+                          // setItemCount={setItemCount}
+                          // dispatch={dispatch}
+                        />
+                        {/* <div className=" flex items-center   bg-white justify-center rounded-md shadow-lg  ">
                           <button className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-l-md transition-all">
                             -
                           </button>
@@ -189,7 +201,7 @@ const RestaurantMenuCategories = ({ menuType }) => {
                           <button className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-r-md transition-all">
                             +
                           </button>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                     {/* <div

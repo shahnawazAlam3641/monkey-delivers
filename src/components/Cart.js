@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import { useSelector } from "react-redux";
 
 const Cart = () => {
-  return (
-    <div>Cart</div>
-  )
-}
+  const cartItems = useSelector((store) => store.cart.items);
 
-export default Cart
+  console.log(cartItems);
+
+  return cartItems.map((item) => {
+    return <div>{item.title || item.card.info.name}</div>;
+  });
+};
+
+export default Cart;

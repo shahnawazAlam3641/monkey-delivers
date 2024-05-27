@@ -1,7 +1,12 @@
 import React from "react";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Header = () => {
+  const cartItems = useSelector((store) => {
+    return store.cart.items;
+  });
+
   return (
     <div className="flex justify-between p-3 bg-[#171a29]">
       <img src={logo} className="w-16 rounded-full" />
@@ -21,7 +26,12 @@ const Header = () => {
             <Link to="/help">Help</Link>
           </li>
           <li className="m-3 cursor-pointer">
-            <Link to="/cart">Cart</Link>
+            <Link to="/cart">
+              Cart{" "}
+              <span className="absolute text-[10px] font-bold ">
+                {cartItems.length}
+              </span>
+            </Link>
           </li>
         </ul>
 

@@ -8,7 +8,7 @@ import RestaurantMenuCarousel from "./RestaurantMenuCarousel";
 import RestaurantMenuCategories from "./RestaurantMenuCategories";
 
 const RestaurantMenu = () => {
-  const [accordianOpen, setAccordionOpen] = useState(false);
+  const [accordianOpen, setAccordionOpen] = useState(2);
 
   const { resId } = useParams();
 
@@ -55,14 +55,19 @@ const RestaurantMenu = () => {
 
       {menu?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.map(
         (menuType, index) => {
+          {
+            /* console.log("new onw", menuType); */
+          }
           return index > 0 ? (
             <>
-              {console.log(menuType)}
+              {/* {console.log(menuType)} */}
               <div>
                 {menuType?.card?.card?.itemCards ? (
                   <RestaurantMenuItemCards
                     key={menuType?.card?.card?.title + index}
                     menuType={menuType}
+                    showFoodItem={index === accordianOpen ? true : false}
+                    accordianOpen={() => setAccordionOpen(index)}
                   />
                 ) : menuType?.card?.card?.carousel ? (
                   <RestaurantMenuCarousel

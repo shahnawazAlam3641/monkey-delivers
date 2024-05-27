@@ -1,13 +1,30 @@
 import React, { useState } from "react";
 import { claudinaryImgCDN } from "../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../utils/cartSlice";
+import { useSelector } from "react-redux";
+import RestaurantDish from "./RestaurantDish";
 
-const RestaurantMenuItemCards = ({ menuType }) => {
-  const [accordianOpen, setAccordianOpen] = useState(true);
+const RestaurantMenuItemCards = ({ menuType, accordianOpen, showFoodItem }) => {
+  const [showItems, setShowItems] = useState(showFoodItem);
 
   const handleAccordian = () => {
-    console.log("clicked");
-    setAccordianOpen(!accordianOpen);
+    // console.log("good");
+    // console.log("clicked", showFoodItem);
+    setShowItems(!showItems);
+    // console.log(showItems);
+    accordianOpen();
+    // setAccordianOpen(!accordianOpen);
   };
+
+  const cartItems = useSelector((store) => store.cart.items);
+
+  // const dispatch = useDispatch();
+
+  // const handleAdd = (item) => {
+  //   console.log(cartItems);
+  //   dispatch(addItem(item));
+  // };
 
   return (
     <div className="w-[850px] max-w-[90vw] mx-auto my-6  ">
@@ -22,7 +39,7 @@ const RestaurantMenuItemCards = ({ menuType }) => {
         </p>
 
         <svg
-          className={`${accordianOpen ? "rotate-180" : "rotate-0"} `}
+          className={`${showItems ? "rotate-180" : "rotate-0"} `}
           aria-hidden="true"
           height="16"
           width="16"
@@ -58,9 +75,15 @@ const RestaurantMenuItemCards = ({ menuType }) => {
       {menuType?.card?.card?.itemCards.map((item) => {
         return (
           <div key={item?.card?.info?.id} className="shadow-md rounded-lg">
-            <div
+            <RestaurantDish
+              showItems={showItems}
+              item={item}
+              // handleAdd={handleAdd}
+            />
+
+            {/* <div
               className={`my-2  justify-between w-full max-w-[90vw] mx-auto p-4  rounded-lg ${
-                accordianOpen ? "flex" : "hidden"
+                showItems ? "flex" : "hidden"
               }   `}
             >
               <div className=" flex flex-col justify-center">
@@ -136,10 +159,6 @@ const RestaurantMenuItemCards = ({ menuType }) => {
                   />
                 ) : null}
 
-                {/* <img
-                  className="w-32 h-32 min-w-32 min-h-32  object-cover rounded-lg"
-                  src={claudinaryImgCDN + item?.card?.info?.imageId}
-                /> */}
                 <button className="bg-green-400 px-5 py-1  hidden rounded-md text-white shadow-lg hover:bg-green-600 ">
                   ADD
                 </button>
@@ -150,12 +169,16 @@ const RestaurantMenuItemCards = ({ menuType }) => {
                   <p className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg transition-all">
                     0
                   </p>
-                  <button className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-r-md transition-all">
+                  <button
+                    onClick={() => handleAdd(item)}
+                    className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-r-md transition-all"
+                  >
                     +
                   </button>
                 </div>
               </div>
-            </div>
+            </div> */}
+
             {/* <div
               className={`w-full bg-slate-200 h-[1px] ${
                 accordianOpen ? "flex" : "hidden"
