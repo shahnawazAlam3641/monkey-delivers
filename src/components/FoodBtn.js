@@ -21,25 +21,11 @@ const FoodBtn = ({ item }) => {
   }, [cartItems]);
 
   return (
-    <div className=" flex items-center   bg-white justify-center rounded-md shadow-lg  ">
+    <>
       <button
-        onClick={() => {
-          if (itemCount === 0) {
-            return;
-          } else {
-            const count = itemCount - 1;
-            setItemCount(count);
-            dispatch(removeItem());
-          }
-        }}
-        className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-l-md transition-all"
-      >
-        -
-      </button>
-      <p className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg transition-all">
-        {itemCount}
-      </p>
-      <button
+        className={`bg-green-400 px-4 py-1.5  rounded-md text-white hover:bg-green-500  ${
+          itemCount ? "hidden" : "block"
+        }`}
         onClick={() => {
           // const count = itemCount + 1;
           // setItemCount(count);
@@ -54,11 +40,52 @@ const FoodBtn = ({ item }) => {
           // setItemCount(totalItem.length);
           // handleAdd(item);
         }}
-        className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-r-md transition-all"
       >
-        +
+        ADD
       </button>
-    </div>
+      <div
+        className={`flex items-center   bg-white justify-center rounded-md shadow-lg ${
+          itemCount ? "block" : "hidden"
+        }`}
+      >
+        <button
+          onClick={() => {
+            if (itemCount === 0) {
+              return;
+            } else {
+              const count = itemCount - 1;
+              setItemCount(count);
+              dispatch(removeItem(item));
+            }
+          }}
+          className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-l-md transition-all"
+        >
+          -
+        </button>
+        <p className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg transition-all">
+          {itemCount}
+        </p>
+        <button
+          onClick={() => {
+            // const count = itemCount + 1;
+            // setItemCount(count);
+            dispatch(addItem(item));
+            // const totalItem = cartItems.filter(
+            //   (food) =>
+            //     food?.title === item?.title ||
+            //     food?.card?.info?.name === item?.card?.info?.name
+            // );
+
+            // console.log(totalItem);
+            // setItemCount(totalItem.length);
+            // handleAdd(item);
+          }}
+          className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-r-md transition-all"
+        >
+          +
+        </button>
+      </div>
+    </>
   );
 };
 

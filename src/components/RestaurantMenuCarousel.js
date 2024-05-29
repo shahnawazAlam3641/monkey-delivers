@@ -23,16 +23,16 @@ const RestaurantMenuCarousel = ({ menuType }) => {
                 {item?.dish?.info?.description}
               </p> */}
             </div>
-            <div className="absolute bottom-0 w-full flex  justify-between items-center">
+            <div className="absolute bottom-0 w-full flex  justify-between items-center pr-4">
               <p className="text-white m-4 text-lg font font-semibold">
                 ₹
                 {item?.dish?.info?.defaultPrice / 100 ||
                   item?.dish?.info?.price / 100}
               </p>
 
-              <button className="bg-green-400 px-4 py-2 m-4 rounded-md text-white hover:bg-green-600 hidden">
+              {/* <button className="bg-green-400 px-4 py-2 m-4 rounded-md text-white hover:bg-green-600 hidden">
                 ADD
-              </button>
+              </button> */}
 
               <FoodBtn item={item} />
 
