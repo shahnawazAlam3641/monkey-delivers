@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, removeItem } from "../utils/cartSlice";
 
-const FoodBtn = ({ item }) => {
+const FoodBtn = ({ item, price, deliveryFee }) => {
+  item.itemPrice = price;
+  item.itemDeliveryFee = deliveryFee;
+
   const [itemCount, setItemCount] = useState(0);
 
   const cartItems = useSelector((store) => store.cart.items);
@@ -12,6 +15,7 @@ const FoodBtn = ({ item }) => {
   useEffect(() => {
     const filteredFood = cartItems.filter((food) => {
       if (food?.title) {
+        console.log("here buddy");
         return food?.title === item?.title;
       } else {
         return food?.card?.info?.name === item?.card?.info?.name;

@@ -8,7 +8,7 @@ import RestaurantMenuCarousel from "./RestaurantMenuCarousel";
 import RestaurantMenuCategories from "./RestaurantMenuCategories";
 
 const RestaurantMenu = () => {
-  const [accordianOpen, setAccordionOpen] = useState(2);
+  const [accordianOpen, setAccordionOpen] = useState(1);
 
   const { resId } = useParams();
 

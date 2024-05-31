@@ -7,7 +7,8 @@ const RestaurantMenuCarousel = ({ menuType }) => {
     <div className="w-[850px] max-w-[90%] mx-auto my-6 flex overflow-x-scroll">
       {menuType?.card?.card?.carousel.map((item) => {
         {
-          console.log(item);
+          /* item.itemPrice =
+          item?.dish?.info?.defaultPrice / 100 || item?.dish?.info?.price / 100; */
         }
         return (
           <div className="relative m-4 min-w-64 " key={item?.bannerId}>
@@ -34,7 +35,13 @@ const RestaurantMenuCarousel = ({ menuType }) => {
                 ADD
               </button> */}
 
-              <FoodBtn item={item} />
+              <FoodBtn
+                item={item}
+                price={
+                  item?.dish?.info?.defaultPrice / 100 ||
+                  item?.dish?.info?.price / 100
+                }
+              />
 
               {/* <div className="m-4 flex items-center  bg-white justify-center rounded-md">
                 <button className="p-3 text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-l-md transition-all">

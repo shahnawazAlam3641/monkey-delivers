@@ -187,6 +187,10 @@ const RestaurantMenuCategories = ({ menuType }) => {
 
                         <FoodBtn
                           item={item}
+                          price={
+                            item?.card?.info?.price / 100 ||
+                            item?.card?.info?.defaultPrice / 100
+                          }
                           // itemCount={itemCount}
                           // setItemCount={setItemCount}
                           // dispatch={dispatch}

@@ -5,7 +5,12 @@ import { addItem } from "../utils/cartSlice";
 import { useSelector } from "react-redux";
 import RestaurantDish from "./RestaurantDish";
 
-const RestaurantMenuItemCards = ({ menuType, accordianOpen, showFoodItem }) => {
+const RestaurantMenuItemCards = ({
+  menuType,
+  accordianOpen,
+  showFoodItem,
+  deliveryFee,
+}) => {
   const [showItems, setShowItems] = useState(showFoodItem);
 
   const handleAccordian = () => {

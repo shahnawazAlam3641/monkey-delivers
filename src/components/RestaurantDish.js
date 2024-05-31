@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { removeItem } from "../utils/cartSlice";
 import FoodBtn from "./FoodBtn";
 
-const RestaurantDish = ({ showItems, item, handleAdd }) => {
+const RestaurantDish = ({ showItems, item }) => {
   // const [itemCount, setItemCount] = useState(0);
 
   // const dispatch = useDispatch();
@@ -99,6 +99,10 @@ const RestaurantDish = ({ showItems, item, handleAdd }) => {
           // dispatch={dispatch}
           // setItemCount={setItemCount}
           item={item}
+          price={
+            item?.card?.info?.price / 100 ||
+            item?.card?.info?.defaultPrice / 100
+          }
         />
         {/* <div className=" flex items-center   bg-white justify-center rounded-md shadow-lg  ">
           <button
