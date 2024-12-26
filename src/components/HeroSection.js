@@ -4,9 +4,10 @@ import hero_img from "../assets/hero-img.png";
 const HeroSection = () => {
   return (
     <div className="max-w-[90%] flex mx-auto">
-      <div className="max-w-[50%] mx-6 mt-20">
-        <p className="text-[#171a29] text-8xl font-black italic leading-[4rem]">
-          <span className="text-9xl">FOOD</span> DELIVERY
+      <div className="md:max-w-[50%] mx-6 mt-20">
+        <p className="flex flex-col text-[#171a29]  font-black italic leading-[2rem] md:leading-[4rem]">
+          <span className="text-5xl md:text-8xl lg:text-9xl">FOOD</span>{" "}
+          <span className="text-4xl md:text-7xl lg:text-8xl">DELIVERY</span>
         </p>
         <br />
         <p className="text-[#171a29] font-semibold">
@@ -25,7 +26,7 @@ const HeroSection = () => {
 
       <img
         src={hero_img}
-        className="scroll-smooth w-[40rem] h-[40rem] scale-x-[-1] mt-[-2rem] -z-10"
+        className="hidden md:block scroll-smooth w-[40rem] h-[40rem] scale-x-[-1] mt-[-2rem] -z-10"
       />
     </div>
   );

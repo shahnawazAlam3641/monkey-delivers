@@ -71,7 +71,7 @@ const RestaurantChains = ({ cuisine }) => {
         </button>
       </div>
 
-      <div className="flex max-w-[80%] mx-auto  gap-[3.8rem] flex-wrap mt-10 t">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 max-w-[80%] mx-auto  gap-[3.8rem]  mt-10 ">
         {/* {if(all){
       restaurants.map((restaurant)=>{
         console.log(all)
@@ -88,6 +88,7 @@ const RestaurantChains = ({ cuisine }) => {
 
         {all &&
           restaurants.map((restaurant) => {
+            // console.log(restaurant);
             return (
               <Link
                 to={"/restaurant/" + restaurant?.info?.id}

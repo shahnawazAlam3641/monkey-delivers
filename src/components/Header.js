@@ -8,7 +8,7 @@ const Header = () => {
   });
 
   return (
-    <div className="flex justify-between p-3 bg-[#171a29]">
+    <div className="flex justify-between p-3 bg-[#171a29] ">
       <img src={logo} className="w-16 rounded-full" />
 
       <div className="flex items-center ">
@@ -19,12 +19,12 @@ const Header = () => {
           <li className="m-3 cursor-pointer">
             <Link to="/search">Search</Link>
           </li>
-          <li className="m-3 cursor-pointer">
+          {/* <li className="m-3 cursor-pointer">
             <Link to="/grocery/category">Grocery</Link>
-          </li>
-          <li className="m-3 cursor-pointer">
+          </li> */}
+          {/* <li className="m-3 cursor-pointer">
             <Link to="/help">Help</Link>
-          </li>
+          </li> */}
           <li className="m-3 cursor-pointer">
             <Link to="/cart">
               Cart{" "}
@@ -35,9 +35,9 @@ const Header = () => {
           </li>
         </ul>
 
-        <button className="bg-yellow-400 p-2 rounded-md m-3 text-[#171a29]">
+        {/* <button className="bg-yellow-400 p-2 rounded-md m-3 text-[#171a29]">
           Login
-        </button>
+        </button> */}
       </div>
     </div>
   );

@@ -1,8 +1,10 @@
 export const MAIN_API =
-  "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7040592&lng=77.10249019999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
+  "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.5399241&lng=88.3874402&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
 
 export const RESTAURANT_MENU_API =
   "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.7040592&lng=77.10249019999999&restaurantId=";
+
+export const CUISINE_CATEGORY_API = `https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.5399241&lng=88.3874402&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null&collection=`;
 
 export const SEARCH_DISH_API =
   "https://www.swiggy.com/dapi/restaurants/search/v3?lat=28.7040592&lng=77.10249019999999&submitAction=SUGGESTION&str=";

@@ -17,11 +17,12 @@ const GroceryCategoryItems = lazy(() =>
 );
 
 import RestaurantMenu from "./components/RestaurantMenu";
+import CuisineCollection from "./components/CuisineCollection";
 // import GroceryCategoryItems from "./components/GroceryCategoryItems";
 const App = () => {
   return (
     <Provider store={appStore}>
-      <div>
+      <div className=" overflow-x-hidden overflow-y-auto ">
         <Header />
         <Outlet />
       </div>
@@ -57,6 +58,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:resId",
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/collection/:collectionId",
+        element: <CuisineCollection />,
       },
     ],
   },

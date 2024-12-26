@@ -3,7 +3,7 @@ import React from "react";
 import { claudinaryImgCDN } from "../utils/constants";
 
 const RestaurantCard = ({ restaurant }) => {
-  // console.log(restaurant);
+  console.log(restaurant);
   const {
     id,
     name,

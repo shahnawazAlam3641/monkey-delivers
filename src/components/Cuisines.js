@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { MAIN_API, CUISINE_IMG_CDN } from "../utils/constants";
 import RestaurantChains from "./RestaurantChains";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { Link, useNavigate } from "react-router-dom";
 
 const Cuisines = () => {
   const [cuisines, setCuisines] = useState(null);
+  const navigate = useNavigate();
 
   const onlineStatus = useOnlineStatus();
 
@@ -13,27 +15,37 @@ const Cuisines = () => {
   }, []);
 
   async function getCuisines() {
-    // console.log('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
-    // const response = await fetch(
-    //   "https://thingproxy.freeboard.io/fetch/" + MAIN_API
-    // );
-    const response = await fetch(MAIN_API);
+    try {
+      // console.log('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
+      // const response = await fetch(
+      //   "https://thingproxy.freeboard.io/fetch/" + MAIN_API
+      // );
+      const response = await fetch(MAIN_API);
 
-    // const response = await fetch('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
-    // const response = await fetch(DEV_API)
-    const json = await response.json();
-
-    setCuisines(json);
+      // const response = await fetch('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
+      // const response = await fetch(DEV_API)
+      const json = await response.json();
+      console.log(json);
+      setCuisines(json);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // console.log(onlineStatus);
 
   if (onlineStatus === false) {
     return <h1>uh ohhh... looks like youre offline</h1>;
-  } else if (!cuisines) {
+  }
+
+  if (!cuisines) {
     return <h1>Loading.................</h1>;
-  } else if (cuisines) {
+  }
+
+  if (cuisines) {
     console.log(cuisines);
+
+    // const { title, info } = cuisines?.data?.cards[0]?.card?.card;
 
     const {
       header: { title },
@@ -47,8 +59,25 @@ const Cuisines = () => {
 
           <div className="flex overflow-x-scroll">
             {info.map((cuisine) => {
+              // console.log(cuisine?.entityId?.split("=")[1]?.split("&")[0]);
+              // console.log(cuisine?.entityId);
+
+              let collectionId;
+
+              // console.log(typeof NaN);
+
+              if (!Number(cuisine?.entityId)) {
+                // console.log("NaN");
+                // console.log(cuisine?.entityId?.split("=")[1]?.split("&")[0]);
+                collectionId = cuisine?.entityId?.split("=")[1]?.split("&")[0];
+              } else {
+                // console.log("Number");
+                // console.log(cuisine?.entityId);
+                collectionId = cuisine?.entityId;
+              }
               return (
                 <img
+                  onClick={() => navigate(`/collection/${collectionId}`)}
                   className="w-40"
                   key={cuisine.id}
                   src={CUISINE_IMG_CDN + cuisine.imageId}

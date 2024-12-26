@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { PRE_SEARCH_API } from "../utils/constants";
 import { claudinaryImgCDN } from "../utils/constants";
+import { Link } from "react-router-dom";
 // import { SEARCH_SUGG_API } from '../constants'
 
 const Search = () => {
+  // const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
   const [preSearchCuisines, setPreSearchCuisines] = useState(null);
   const [sugg, setSugg] = useState(null);
@@ -111,15 +113,18 @@ const Search = () => {
 
           <div className="flex  overflow-scroll overflow-y-hidden">
             {info.map((searchCuisine) => {
+              console.log(searchCuisine);
               return (
-                <img
-                  key={searchCuisine.id}
-                  className="w-24"
-                  src={
-                    "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/" +
-                    searchCuisine.imageId
-                  }
-                />
+                <Link to={"/"}>
+                  <img
+                    key={searchCuisine.id}
+                    className="w-24"
+                    src={
+                      "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/" +
+                      searchCuisine.imageId
+                    }
+                  />
+                </Link>
               );
             })}
           </div>
