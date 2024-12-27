@@ -12,11 +12,11 @@ const FoodBtn = ({ item, price, deliveryFee }) => {
     itemDeliveryFee: deliveryFee,
   };
 
-  console.log(updatedItem);
+  // console.log(updatedItem);
 
-  console.log(
-    "firstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirst"
-  );
+  // console.log(
+  //   "firstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirst"
+  // );
 
   const [itemCount, setItemCount] = useState(0);
 
@@ -39,7 +39,7 @@ const FoodBtn = ({ item, price, deliveryFee }) => {
   return (
     <>
       <button
-        className={`bg-green-400 px-4 py-1.5  rounded-md text-white hover:bg-green-500  ${
+        className={`bg-green-400 px-4 py-1.5 w-fit  rounded-md text-white hover:bg-green-500  ${
           itemCount ? "hidden" : "block"
         }`}
         onClick={() => {
@@ -60,7 +60,7 @@ const FoodBtn = ({ item, price, deliveryFee }) => {
         ADD
       </button>
       <div
-        className={`flex items-center   bg-white justify-center rounded-md shadow-lg ${
+        className={` w-fit flex items-center   bg-white justify-center rounded-md shadow-lg ${
           itemCount ? "block" : "hidden"
         }`}
       >
@@ -74,7 +74,7 @@ const FoodBtn = ({ item, price, deliveryFee }) => {
               dispatch(removeItem(updatedItem));
             }
           }}
-          className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-l-md transition-all"
+          className=" py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-l-md transition-all"
         >
           -
         </button>

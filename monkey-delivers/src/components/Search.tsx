@@ -7,6 +7,7 @@ import {
 import { claudinaryImgCDN } from "../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 import FoodBtn from "./FoodBtn";
+import DishSearchCard from "./DishSearchCard";
 // import { SEARCH_SUGG_API } from '../constants'
 
 const Search = () => {
@@ -40,7 +41,8 @@ const Search = () => {
 
   useEffect(() => {
     // console.log(searchText.length > 1);
-    setDishes([]);
+    setDishes(null);
+    setSearchCuisine(null);
     if (searchText.length > 1) {
       // console.log("if else called");
       const searchTimeOut = setTimeout(() => {
@@ -102,55 +104,70 @@ const Search = () => {
     } = preSearchCuisines?.data?.cards[1]?.card?.card;
 
     return (
-      <div className=" max-w-[80%] mx-auto flex flex-col gap-8 p-4">
-        <div className=" mx-auto mt-8 w-[100%] flex justify-center gap-2">
+      <div className="w-[800px] max-w-[90%] mx-auto flex flex-col gap-8 p-4">
+        <div className="relative mx-auto mt-8 w-[100%] flex justify-center gap-2">
           <input
             type="text"
             value={searchText}
             onChange={handleSearch}
-            className="rounded-lg w-[100%] max-w-[850px] border-2 p-3  "
+            className="rounded-lg w-full border-2 p-3  "
             placeholder="Search for Restaurants and Food"
           />
+          {searchText.length > 0 ? (
+            <p
+              onClick={() => setSearchText("")}
+              className="absolute right-[5%] cursor-pointer top-1/2 -translate-y-1/2 "
+            >
+              X
+            </p>
+          ) : null}
         </div>
 
+        {/* <DishSearchCard /> */}
         {dishes && (
-          <div className="flex flex-wrap gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {dishes.map((dish, index) => {
               // console.log(dish);
               if (index > 0) {
                 // console.log(dish?.card?.card?.restaurant);
                 return (
-                  <div className="p-5 bg-gray-300">
-                    <div
-                      onClick={() =>
-                        navigate(
-                          `/restaurant/${dish?.card?.card?.restaurant?.info?.id}`
-                        )
-                      }
-                    >
-                      <p className="font-bold">
-                        By {dish?.card?.card?.restaurant?.info?.name}
-                      </p>
-                      <p className="font-bold">
-                        {dish?.card?.card?.restaurant?.info?.avgRating} (
-                        {dish?.card?.card?.restaurant?.info?.totalRatingsString}{" "}
-                        ratings)
-                      </p>
-                    </div>
-                    <div>
-                      <p>{dish?.card?.card?.info?.name}</p>
-                      <img
-                        className="rounded-lg w-20"
-                        src={claudinaryImgCDN + dish?.card?.card?.info?.imageId}
-                      />
-                      <FoodBtn
-                        item={dish?.card}
-                        price={dish?.card?.card?.info?.price / 100}
-                        deliveryFee={0}
-                      />
-                      <p>Rs. {dish?.card?.card?.info?.price / 100}</p>
-                    </div>
-                  </div>
+                  <DishSearchCard dish={dish} />
+                  // <div className="p-5 bg-gray-300 flexx flex-col gap-6">
+                  //   <div
+                  //     onClick={() =>
+                  //       navigate(
+                  //         `/restaurant/${dish?.card?.card?.restaurant?.info?.id}`
+                  //       )
+                  //     }
+                  //   >
+                  //     <p className="font-bold text-gray-500">
+                  //       By {dish?.card?.card?.restaurant?.info?.name}
+                  //     </p>
+                  //     <p className="text-gray-500">
+                  //       {dish?.card?.card?.restaurant?.info?.avgRating} (
+                  //       {dish?.card?.card?.restaurant?.info?.totalRatingsString}{" "}
+                  //       ratings)
+                  //     </p>
+                  //   </div>
+
+                  //   <div className="w-full h-[1px] bg-slate-400"> </div>
+
+                  //   <div>
+                  //     <p className="text-gray-600 font-bold ">
+                  //       {dish?.card?.card?.info?.name}
+                  //     </p>
+                  //     <img
+                  //       className="rounded-lg w-20"
+                  //       src={claudinaryImgCDN + dish?.card?.card?.info?.imageId}
+                  //     />
+                  //     <FoodBtn
+                  //       item={dish?.card}
+                  //       price={dish?.card?.card?.info?.price / 100}
+                  //       deliveryFee={0}
+                  //     />
+                  //     <p>Rs. {dish?.card?.card?.info?.price / 100}</p>
+                  //   </div>
+                  // </div>
                 );
               }
             })}
@@ -189,7 +206,7 @@ const Search = () => {
                       <div>
                         {cuisineRest?.card?.card?.info?.cuisines.map(
                           (cuisine) => {
-                            return <span> {cuisine}, </span>;
+                            return <span>, {cuisine}</span>;
                           }
                         )}{" "}
                       </div>
