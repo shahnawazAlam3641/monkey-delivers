@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { PRE_SEARCH_API, SEARCH_DISH_API } from "../utils/constants";
+import {
+  PRE_SEARCH_API,
+  SEARCH_CUISINE_API,
+  SEARCH_DISH_API,
+} from "../utils/constants";
 import { claudinaryImgCDN } from "../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 import FoodBtn from "./FoodBtn";
@@ -9,7 +13,8 @@ const Search = () => {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
   const [preSearchCuisines, setPreSearchCuisines] = useState(null);
-  const [dishes, setDishes] = useState([]);
+  const [dishes, setDishes] = useState(null);
+  const [searchCuisine, setSearchCuisine] = useState(null);
   const [sugg, setSugg] = useState(null);
 
   const handleSearch = (e) => {
@@ -29,15 +34,15 @@ const Search = () => {
     const response = await fetch(PRE_SEARCH_API);
 
     const json = await response.json();
-    console.log(json);
+    // console.log(json);
     setPreSearchCuisines(json);
   }
 
   useEffect(() => {
-    console.log(searchText.length > 1);
+    // console.log(searchText.length > 1);
     setDishes([]);
     if (searchText.length > 1) {
-      console.log("if else called");
+      // console.log("if else called");
       const searchTimeOut = setTimeout(() => {
         getSearchSugg();
       }, 300);
@@ -50,8 +55,23 @@ const Search = () => {
     try {
       const response = await fetch(SEARCH_DISH_API + dish);
       const data = await response.json();
-      console.log(data?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards);
+      // console.log(data?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards);
       setDishes(data?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getSearchCuisine = async (cuisine) => {
+    try {
+      const response = await fetch(SEARCH_CUISINE_API + cuisine);
+      const data = await response.json();
+      console.log(
+        data?.data?.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards
+      );
+      setSearchCuisine(
+        data?.data?.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards
+      );
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +88,7 @@ const Search = () => {
     );
 
     const json = await response.json();
-    console.log(json);
+    // console.log(json);
     setSugg(json);
   }
 
@@ -96,9 +116,9 @@ const Search = () => {
         {dishes && (
           <div className="flex flex-wrap gap-4">
             {dishes.map((dish, index) => {
-              console.log(dish);
+              // console.log(dish);
               if (index > 0) {
-                console.log(dish?.card?.card?.restaurant);
+                // console.log(dish?.card?.card?.restaurant);
                 return (
                   <div className="p-5 bg-gray-300">
                     <div
@@ -137,6 +157,50 @@ const Search = () => {
           </div>
         )}
 
+        {searchCuisine && (
+          <div>
+            {" "}
+            {searchCuisine.map((cuisineRest) => {
+              return (
+                <div
+                  onClick={() =>
+                    navigate(`/restaurant/${cuisineRest?.card?.card?.info?.id}`)
+                  }
+                  className="cursor-pointer"
+                >
+                  <img
+                    className="rounded-md w-20 aspect-square object-cover"
+                    src={
+                      claudinaryImgCDN +
+                      cuisineRest?.card?.card?.info?.cloudinaryImageId
+                    }
+                  />
+                  <div>
+                    <p>{cuisineRest?.card?.card?.info?.name}</p>
+                    <div>
+                      <span>
+                        {" "}
+                        {cuisineRest?.card?.card?.info?.avgRating ||
+                          cuisineRest?.card?.card?.info?.avgRatingString}{" "}
+                        ({cuisineRest?.card?.card?.info?.totalRatingsString}
+                        ratings)
+                      </span>
+
+                      <div>
+                        {cuisineRest?.card?.card?.info?.cuisines.map(
+                          (cuisine) => {
+                            return <span> {cuisine}, </span>;
+                          }
+                        )}{" "}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}{" "}
+          </div>
+        )}
+
         {sugg && (
           <div
             className={`flex flex-col gap-4 items-center ${
@@ -145,11 +209,11 @@ const Search = () => {
           >
             {sugg.data.suggestions.map((suggestion, index) => {
               // console.log(suggestion?.metadata);
-              console.log(suggestion?.metadata?.split(";")[4]?.split(",")[0]);
+              // console.log(suggestion?.metadata?.split(";")[4]?.split(",")[0]);
               return (
                 <div
                   onClick={() => {
-                    console.log(suggestion?.type);
+                    // console.log(suggestion?.type);
 
                     if (suggestion?.type == "RESTAURANT") {
                       navigate(
@@ -161,6 +225,11 @@ const Search = () => {
 
                     if (suggestion?.type == "DISH") {
                       getDishes(suggestion?.text);
+                    }
+
+                    if (suggestion?.type == "CUISINE") {
+                      console.log("first");
+                      getSearchCuisine(suggestion?.text);
                     }
 
                     setSugg(null);
@@ -192,7 +261,7 @@ const Search = () => {
 
           <div className="flex  overflow-scroll overflow-y-hidden">
             {info.map((searchCuisine) => {
-              console.log(searchCuisine.entityId);
+              // console.log(searchCuisine.entityId);
               return (
                 <img
                   onClick={() =>

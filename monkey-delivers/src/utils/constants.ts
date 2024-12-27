@@ -9,6 +9,9 @@ export const CUISINE_CATEGORY_API = `https://www.swiggy.com/dapi/restaurants/lis
 export const SEARCH_DISH_API =
   "https://www.swiggy.com/dapi/restaurants/search/v3?lat=28.7040592&lng=77.10249019999999&submitAction=SUGGESTION&str=";
 
+export const SEARCH_CUISINE_API =
+  "https://www.swiggy.com/dapi/restaurants/search/v3?lat=28.7040592&lng=77.10249019999999&submitAction=SUGGESTION&str=";
+
 export const CUISINE_IMG_CDN =
   "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/";
 
