@@ -90,6 +90,12 @@ const Cuisines = () => {
         <br /> <br />
         <div className="w-[85%] h-[2px] bg-[#F0F0F5] mx-auto"></div>
         <RestaurantChains cuisine={cuisines} />
+        <span
+          onClick={() => navigate("/search")}
+          className="bg-orange-400 p-2 cursor-pointer hover:scale-95 transition-all duration-200 text-lg font-bold text-white rounded-md w-fit mx-auto"
+        >
+          Search Your Craving
+        </span>
       </>
     );
   }

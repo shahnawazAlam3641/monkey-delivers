@@ -3,14 +3,16 @@ import { Provider } from "react-redux";
 import Header from "./components/Header";
 import appStore from "./utils/appStore";
 import { Outlet } from "react-router-dom";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <Provider store={appStore}>
-      <div className=" overflow-x-hidden overflow-y-auto ">
+      <div className="flex flex-col min-h-screen overflow-x-hidden overflow-y-auto ">
         <Header />
         <Outlet />
       </div>
+      <Footer />
     </Provider>
   );
 }

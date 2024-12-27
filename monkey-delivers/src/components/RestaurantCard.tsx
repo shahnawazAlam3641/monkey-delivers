@@ -16,7 +16,7 @@ const RestaurantCard = ({ restaurant }) => {
 
   // console.log(restaurant?.info?.cloudinaryImageId)
   return (
-    <div className="cursor-pointer flex flex-col w-56 overflow-scroll truncate transition-all  duration-500 hover:scale-105  ">
+    <div className="cursor-pointer flex flex-col w-56 overflow-scroll truncate transition-all  duration-200 hover:scale-95  ">
       <img
         className="w-56 h-36 object-cover rounded-lg"
         src={claudinaryImgCDN + cloudinaryImageId}

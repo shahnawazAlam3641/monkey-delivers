@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
-import { PRE_SEARCH_API } from "../utils/constants";
+import { PRE_SEARCH_API, SEARCH_DISH_API } from "../utils/constants";
 import { claudinaryImgCDN } from "../utils/constants";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import FoodBtn from "./FoodBtn";
 // import { SEARCH_SUGG_API } from '../constants'
 
 const Search = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
   const [preSearchCuisines, setPreSearchCuisines] = useState(null);
+  const [dishes, setDishes] = useState([]);
   const [sugg, setSugg] = useState(null);
 
   const handleSearch = (e) => {
@@ -33,16 +35,27 @@ const Search = () => {
 
   useEffect(() => {
     console.log(searchText.length > 1);
-
+    setDishes([]);
     if (searchText.length > 1) {
       console.log("if else called");
       const searchTimeOut = setTimeout(() => {
         getSearchSugg();
-      }, 250);
+      }, 300);
 
       return () => clearInterval(searchTimeOut);
     }
   }, [searchText]);
+
+  const getDishes = async (dish) => {
+    try {
+      const response = await fetch(SEARCH_DISH_API + dish);
+      const data = await response.json();
+      console.log(data?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards);
+      setDishes(data?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   async function getSearchSugg() {
     // const response = await fetch(
@@ -80,6 +93,50 @@ const Search = () => {
           />
         </div>
 
+        {dishes && (
+          <div className="flex flex-wrap gap-4">
+            {dishes.map((dish, index) => {
+              console.log(dish);
+              if (index > 0) {
+                console.log(dish?.card?.card?.restaurant);
+                return (
+                  <div className="p-5 bg-gray-300">
+                    <div
+                      onClick={() =>
+                        navigate(
+                          `/restaurant/${dish?.card?.card?.restaurant?.info?.id}`
+                        )
+                      }
+                    >
+                      <p className="font-bold">
+                        By {dish?.card?.card?.restaurant?.info?.name}
+                      </p>
+                      <p className="font-bold">
+                        {dish?.card?.card?.restaurant?.info?.avgRating} (
+                        {dish?.card?.card?.restaurant?.info?.totalRatingsString}{" "}
+                        ratings)
+                      </p>
+                    </div>
+                    <div>
+                      <p>{dish?.card?.card?.info?.name}</p>
+                      <img
+                        className="rounded-lg w-20"
+                        src={claudinaryImgCDN + dish?.card?.card?.info?.imageId}
+                      />
+                      <FoodBtn
+                        item={dish?.card}
+                        price={dish?.card?.card?.info?.price / 100}
+                        deliveryFee={0}
+                      />
+                      <p>Rs. {dish?.card?.card?.info?.price / 100}</p>
+                    </div>
+                  </div>
+                );
+              }
+            })}
+          </div>
+        )}
+
         {sugg && (
           <div
             className={`flex flex-col gap-4 items-center ${
@@ -87,10 +144,27 @@ const Search = () => {
             }`}
           >
             {sugg.data.suggestions.map((suggestion, index) => {
-              console.log(suggestion?.metadata);
-              // console.log(suggestion?.metadata?.split(";")[4]?.split(",")[0]);
+              // console.log(suggestion?.metadata);
+              console.log(suggestion?.metadata?.split(";")[4]?.split(",")[0]);
               return (
                 <div
+                  onClick={() => {
+                    console.log(suggestion?.type);
+
+                    if (suggestion?.type == "RESTAURANT") {
+                      navigate(
+                        `/restaurant/${
+                          suggestion?.metadata?.split(":")[4]?.split(",")[0]
+                        }`
+                      );
+                    }
+
+                    if (suggestion?.type == "DISH") {
+                      getDishes(suggestion?.text);
+                    }
+
+                    setSugg(null);
+                  }}
                   key={index}
                   className="w-[80%] flex gap-4 p-2  hover:bg-slate-200 rounded-md"
                 >

@@ -1,14 +1,19 @@
 import logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Header = () => {
+  const navigate = useNavigate();
   const cartItems = useSelector((store) => {
     return store.cart.items;
   });
 
   return (
-    <div className="flex justify-between p-3 bg-[#171a29] ">
-      <img src={logo} className="w-16 rounded-full" />
+    <div className="flex justify-between py-3 px-10 bg-[#171a29] ">
+      <img
+        onClick={() => navigate("/")}
+        src={logo}
+        className="w-16 rounded-full cursor-pointer"
+      />
 
       <div className="flex items-center ">
         <ul className="flex items-center text-white">

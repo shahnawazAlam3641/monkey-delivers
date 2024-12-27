@@ -6,6 +6,18 @@ const FoodBtn = ({ item, price, deliveryFee }) => {
   item.itemPrice = price;
   item.itemDeliveryFee = deliveryFee;
 
+  const updatedItem = {
+    ...item,
+    itemPrice: price,
+    itemDeliveryFee: deliveryFee,
+  };
+
+  console.log(updatedItem);
+
+  console.log(
+    "firstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirst"
+  );
+
   const [itemCount, setItemCount] = useState(0);
 
   const cartItems = useSelector((store) => store.cart.items);
@@ -16,9 +28,9 @@ const FoodBtn = ({ item, price, deliveryFee }) => {
     const filteredFood = cartItems.filter((food) => {
       if (food?.title) {
         console.log("here buddy");
-        return food?.title === item?.title;
+        return food?.title === updatedItem?.title;
       } else {
-        return food?.card?.info?.name === item?.card?.info?.name;
+        return food?.card?.info?.name === updatedItem?.card?.info?.name;
       }
     });
     setItemCount(filteredFood.length);
@@ -33,7 +45,7 @@ const FoodBtn = ({ item, price, deliveryFee }) => {
         onClick={() => {
           // const count = itemCount + 1;
           // setItemCount(count);
-          dispatch(addItem(item));
+          dispatch(addItem(updatedItem));
           // const totalItem = cartItems.filter(
           //   (food) =>
           //     food?.title === item?.title ||
@@ -59,7 +71,7 @@ const FoodBtn = ({ item, price, deliveryFee }) => {
             } else {
               const count = itemCount - 1;
               setItemCount(count);
-              dispatch(removeItem(item));
+              dispatch(removeItem(updatedItem));
             }
           }}
           className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-l-md transition-all"
@@ -73,7 +85,7 @@ const FoodBtn = ({ item, price, deliveryFee }) => {
           onClick={() => {
             // const count = itemCount + 1;
             // setItemCount(count);
-            dispatch(addItem(item));
+            dispatch(addItem(updatedItem));
             // const totalItem = cartItems.filter(
             //   (food) =>
             //     food?.title === item?.title ||
