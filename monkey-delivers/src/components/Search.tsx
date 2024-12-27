@@ -8,6 +8,8 @@ import { claudinaryImgCDN } from "../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 import FoodBtn from "./FoodBtn";
 import DishSearchCard from "./DishSearchCard";
+import CuisineRestSearchCard from "./CuisineRestSearchCard";
+import SearchShimmer from "./SearchShimmer";
 // import { SEARCH_SUGG_API } from '../constants'
 
 const Search = () => {
@@ -17,6 +19,7 @@ const Search = () => {
   const [dishes, setDishes] = useState(null);
   const [searchCuisine, setSearchCuisine] = useState(null);
   const [sugg, setSugg] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -41,6 +44,7 @@ const Search = () => {
 
   useEffect(() => {
     // console.log(searchText.length > 1);
+
     setDishes(null);
     setSearchCuisine(null);
     if (searchText.length > 1) {
@@ -55,17 +59,21 @@ const Search = () => {
 
   const getDishes = async (dish) => {
     try {
+      setLoading(true);
       const response = await fetch(SEARCH_DISH_API + dish);
       const data = await response.json();
       // console.log(data?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards);
       setDishes(data?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
 
   const getSearchCuisine = async (cuisine) => {
     try {
+      setLoading(true);
       const response = await fetch(SEARCH_CUISINE_API + cuisine);
       const data = await response.json();
       console.log(
@@ -74,24 +82,34 @@ const Search = () => {
       setSearchCuisine(
         data?.data?.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards
       );
+
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
 
   async function getSearchSugg() {
-    // const response = await fetch(
-    //   "https://thingproxy.freeboard.io/fetch/" +
-    //     `https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.7040592&lng=77.10249019999999&str=${searchText}&trackingId=undefined`
-    // );
+    try {
+      // const response = await fetch(
+      //   "https://thingproxy.freeboard.io/fetch/" +
+      //     `https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.7040592&lng=77.10249019999999&str=${searchText}&trackingId=undefined`
+      // );
+      setLoading(true);
+      const response = await fetch(
+        `https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.7040592&lng=77.10249019999999&str=${searchText}&trackingId=undefined`
+      );
 
-    const response = await fetch(
-      `https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.7040592&lng=77.10249019999999&str=${searchText}&trackingId=undefined`
-    );
+      const json = await response.json();
+      // console.log(json);
+      setSugg(json);
 
-    const json = await response.json();
-    // console.log(json);
-    setSugg(json);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   }
 
   if (preSearchCuisines) {
@@ -122,6 +140,14 @@ const Search = () => {
             </p>
           ) : null}
         </div>
+
+        {loading && (
+          <div className="w-full">
+            {Array.from(Array(10)).map(() => {
+              return <SearchShimmer />;
+            })}
+          </div>
+        )}
 
         {/* <DishSearchCard /> */}
         {dishes && (
@@ -175,44 +201,45 @@ const Search = () => {
         )}
 
         {searchCuisine && (
-          <div>
-            {" "}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {searchCuisine.map((cuisineRest) => {
               return (
-                <div
-                  onClick={() =>
-                    navigate(`/restaurant/${cuisineRest?.card?.card?.info?.id}`)
-                  }
-                  className="cursor-pointer"
-                >
-                  <img
-                    className="rounded-md w-20 aspect-square object-cover"
-                    src={
-                      claudinaryImgCDN +
-                      cuisineRest?.card?.card?.info?.cloudinaryImageId
-                    }
-                  />
-                  <div>
-                    <p>{cuisineRest?.card?.card?.info?.name}</p>
-                    <div>
-                      <span>
-                        {" "}
-                        {cuisineRest?.card?.card?.info?.avgRating ||
-                          cuisineRest?.card?.card?.info?.avgRatingString}{" "}
-                        ({cuisineRest?.card?.card?.info?.totalRatingsString}
-                        ratings)
-                      </span>
+                <CuisineRestSearchCard cuisineRest={cuisineRest} />
 
-                      <div>
-                        {cuisineRest?.card?.card?.info?.cuisines.map(
-                          (cuisine) => {
-                            return <span>, {cuisine}</span>;
-                          }
-                        )}{" "}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                // <div
+                //   onClick={() =>
+                //     navigate(`/restaurant/${cuisineRest?.card?.card?.info?.id}`)
+                //   }
+                //   className="cursor-pointer"
+                // >
+                //   <img
+                //     className="rounded-md w-20 aspect-square object-cover"
+                //     src={
+                //       claudinaryImgCDN +
+                //       cuisineRest?.card?.card?.info?.cloudinaryImageId
+                //     }
+                //   />
+                //   <div>
+                //     <p>{cuisineRest?.card?.card?.info?.name}</p>
+                //     <div>
+                //       <span>
+                //         {" "}
+                //         {cuisineRest?.card?.card?.info?.avgRating ||
+                //           cuisineRest?.card?.card?.info?.avgRatingString}{" "}
+                //         ({cuisineRest?.card?.card?.info?.totalRatingsString}
+                //         ratings)
+                //       </span>
+
+                //       <div>
+                //         {cuisineRest?.card?.card?.info?.cuisines.map(
+                //           (cuisine) => {
+                //             return <span>, {cuisine}</span>;
+                //           }
+                //         )}
+                //       </div>
+                //     </div>
+                //   </div>
+                // </div>
               );
             })}{" "}
           </div>
