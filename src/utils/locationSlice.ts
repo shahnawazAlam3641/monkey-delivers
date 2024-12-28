@@ -3,14 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const locationSlice = createSlice({
   name: "location",
   initialState: {
-    lat: 21212121,
-    long: 151515151,
+    lat: 22.5399241,
+    long: 88.3874402,
+    address: "Kolkata",
   },
   reducers: {
     setLocation: (state, action) => {
-      const { lat, long } = action.payload;
+      const { lat, long, address } = action.payload;
       state.lat = lat;
       state.long = long;
+      state.address = address;
       console.log("updated success");
     },
   },

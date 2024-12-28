@@ -3,15 +3,27 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setLocation } from "../utils/locationSlice";
+import { useState } from "react";
+import LocationSidebar from "./LocationSidebar";
+import { useApiUrls } from "../utils/useApiUrls";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartItems = useSelector((store) => {
     return store.cart.items;
   });
+  const currentLocation = useSelector((store) => store?.location?.address);
+
+  console.log(currentLocation);
+
+  const [locationSideBar, setLocationSideBar] = useState(false);
 
   return (
-    <div className="flex justify-between items-center py-3 px-10 bg-[#171a29] ">
+    <div className="relative flex justify-between items-center py-3 px-10 bg-[#171a29] ">
+      <LocationSidebar
+        setLocationSideBar={setLocationSideBar}
+        locationSideBar={locationSideBar}
+      />
       <div className="flex gap-5 items-center">
         <img
           onClick={() => navigate("/")}
@@ -20,17 +32,11 @@ const Header = () => {
         />
 
         <p
-          onClick={() => {
-            navigator.geolocation.getCurrentPosition((position) => {
-              const { latitude, longitude } = position.coords;
-              console.log(latitude, longitude);
-
-              dispatch(setLocation({ lat: latitude, long: longitude }));
-            });
-          }}
-          className="text-white"
+          className="text-white cursor-pointer flex gap-3 *:justify-center items-center group"
+          onClick={() => setLocationSideBar(true)}
         >
-          Location
+          <span className="group-hover:underline  py-1 font-medium">Other</span>{" "}
+          <span className="text-gray-400 text-sm">{currentLocation}</span>
         </p>
       </div>
 

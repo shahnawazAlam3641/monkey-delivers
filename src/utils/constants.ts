@@ -1,3 +1,31 @@
+export const createApiUrls = (lat, long) => {
+  const urlObj = {
+    MAIN_API: `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${lat}&lng=${long}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`,
+
+    RESTAURANT_MENU_API: (restaurantId) =>
+      `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${lat}&lng=${long}&restaurantId=${restaurantId}`,
+
+    CUISINE_CATEGORY_API: (collectioId) =>
+      `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${lat}&lng=${long}&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null&collection=${collectioId}`,
+
+    SEARCH_DISH_API: (dish) =>
+      `https://www.swiggy.com/dapi/restaurants/search/v3?lat=${lat}&lng=${long}&submitAction=SUGGESTION&str=${dish}`,
+
+    SEARCH_CUISINE_API: (cuisine) =>
+      `https://www.swiggy.com/dapi/restaurants/search/v3?lat=${lat}&lng=${long}&submitAction=SUGGESTION&str=${cuisine}`,
+
+    PRE_SEARCH_API: `https://www.swiggy.com/dapi/landing/PRE_SEARCH?lat=${lat}&lng=${long}`,
+  };
+
+  return urlObj;
+};
+
+export const LOCATION_API =
+  "https://www.swiggy.com/dapi/misc/place-autocomplete?input=";
+
+export const SWIGGY_COORDS_API =
+  "https://www.swiggy.com/dapi/misc/address-recommend?place_id=";
+
 export const MAIN_API =
   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.5399241&lng=88.3874402&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
 
