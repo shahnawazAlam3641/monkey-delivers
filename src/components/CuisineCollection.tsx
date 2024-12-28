@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard";
+import { useApiUrls } from "../utils/useApiUrls";
 // import { CUISINE_CATEGORY_API } from "../utils/constants";
 
 const CuisineCollection = () => {
@@ -9,10 +10,12 @@ const CuisineCollection = () => {
   const [collectionInfo, setCollectionInfo] = useState(null);
 
   const { collectionId } = useParams();
+
+  const urls = useApiUrls();
   //   console.log(params);
 
   const fetchCollectionRestaurants = async () => {
-    const response = await fetch(CUISINE_CATEGORY_API + collectionId);
+    const response = await fetch(urls?.CUISINE_CATEGORY_API(collectionId));
     const data = await response.json();
 
     const filteredRest = data?.data?.cards.filter((cardData) => {

@@ -4,9 +4,12 @@ import GroceryNav from "./GroceryNav";
 import { claudinaryImgCDN } from "../utils/constants";
 import GroceryCategoryCard from "./GroceryCategoryCard";
 import { Link } from "react-router-dom";
+import { useApiUrls } from "../utils/useApiUrls";
 
 const Grocery = () => {
   const [groceryHome, setGroceryHome] = useState(null);
+
+  const urls = useApiUrls();
 
   useEffect(() => {
     getGroceryHome();

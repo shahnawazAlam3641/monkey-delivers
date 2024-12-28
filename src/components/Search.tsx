@@ -10,6 +10,7 @@ import FoodBtn from "./FoodBtn";
 import DishSearchCard from "./DishSearchCard";
 import CuisineRestSearchCard from "./CuisineRestSearchCard";
 import SearchShimmer from "./SearchShimmer";
+import { useApiUrls } from "../utils/useApiUrls";
 // import { SEARCH_SUGG_API } from '../constants'
 
 const Search = () => {
@@ -20,6 +21,8 @@ const Search = () => {
   const [searchCuisine, setSearchCuisine] = useState(null);
   const [sugg, setSugg] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const urls = useApiUrls();
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -35,7 +38,7 @@ const Search = () => {
     // const response = await fetch(DEV_API)
 
     // const response = await fetch('https://thingproxy.freeboard.io/fetch/' + PRE_SEARCH_API)
-    const response = await fetch(PRE_SEARCH_API);
+    const response = await fetch(urls?.PRE_SEARCH_API);
 
     const json = await response.json();
     // console.log(json);
@@ -60,7 +63,7 @@ const Search = () => {
   const getDishes = async (dish) => {
     try {
       setLoading(true);
-      const response = await fetch(SEARCH_DISH_API + dish);
+      const response = await fetch(urls?.SEARCH_DISH_API(dish));
       const data = await response.json();
       // console.log(data?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards);
       setDishes(data?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards);
@@ -74,7 +77,7 @@ const Search = () => {
   const getSearchCuisine = async (cuisine) => {
     try {
       setLoading(true);
-      const response = await fetch(SEARCH_CUISINE_API + cuisine);
+      const response = await fetch(urls?.SEARCH_CUISINE_API(cuisine));
       const data = await response.json();
       console.log(
         data?.data?.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards
@@ -97,9 +100,7 @@ const Search = () => {
       //     `https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.7040592&lng=77.10249019999999&str=${searchText}&trackingId=undefined`
       // );
       setLoading(true);
-      const response = await fetch(
-        `https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.7040592&lng=77.10249019999999&str=${searchText}&trackingId=undefined`
-      );
+      const response = await fetch(urls?.SEARCH_SUGG_API(searchText));
 
       const json = await response.json();
       // console.log(json);

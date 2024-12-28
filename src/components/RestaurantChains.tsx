@@ -35,9 +35,31 @@ const RestaurantChains = ({ cuisine }) => {
     }
   };
 
-  const { restaurants } =
-    cuisine?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle;
-  // console.log(cuisine?.data?.cards[2]?.card?.card?.title)
+  let restaurants = [];
+
+  if (
+    cuisine?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+      ?.restaurants
+  ) {
+    const restaurantArray =
+      cuisine?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
+    // console.log(cuisine?.data?.cards[2]?.card?.card?.title)
+
+    restaurants = [...restaurantArray];
+  }
+
+  if (
+    cuisine?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+      ?.restaurants
+  ) {
+    const restaurantArray =
+      cuisine?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
+    // console.log(cuisine?.data?.cards[2]?.card?.card?.title)
+
+    restaurants = [...restaurantArray];
+  }
 
   return (
     <div className="flex flex-col scroll-smooth" id="restaurants">

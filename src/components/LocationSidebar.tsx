@@ -11,7 +11,7 @@ const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
     try {
       const response = await fetch(LOCATION_API + locationInput);
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       setLocationData(data?.data);
     } catch (error) {
       console.log(error);
@@ -27,9 +27,33 @@ const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
       const lat = data?.data[0]?.geometry?.location?.lat;
       const long = data?.data[0]?.geometry?.location?.lng;
 
-      console.log({ lat: lat, long: long, address: address });
+      // console.log({ lat: lat, long: long, address: address });
 
-      dispatch(setLocation({ lat: lat, long: long, address: address }));
+      console.log(data?.data[0]);
+
+      dispatch(
+        setLocation({
+          lat: lat,
+          long: long,
+          address: {
+            main_text: data?.data[0]?.address_components[0]?.short_name,
+            secondary_text: `${data?.data[0]?.address_components[1]?.short_name}, ${data?.data[0]?.address_components[2]?.short_name}`,
+          },
+        })
+      );
+      localStorage.setItem(
+        "location",
+        JSON.stringify({
+          lat: lat,
+          long: long,
+          address: {
+            main_text: data?.data[0]?.address_components[0]?.short_name,
+            secondary_text: `${data?.data[0]?.address_components[1]?.short_name}, ${data?.data[0]?.address_components[2]?.short_name}`,
+          },
+        })
+      );
+
+      console.log(localStorage.getItem("location"));
     } catch (error) {
       console.log(error);
     }
@@ -38,7 +62,7 @@ const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
   useEffect(() => {
     let timeout;
 
-    console.log(locationInput.length > 1);
+    // console.log(locationInput.length > 1);
     if (locationInput.length > 1) {
       timeout = setTimeout(() => {
         getLocationSugg();
@@ -72,14 +96,16 @@ const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
 
           {locationData &&
             locationData.map((location) => {
+              // console.log(location);
               return (
                 <div
                   key={location?.place_id}
                   onClick={() =>
-                    getCoords(
-                      location?.place_id,
-                      location?.structured_formatting?.secondary_text
-                    )
+                    getCoords(location?.place_id, {
+                      main_text: location?.structured_formatting?.main_text,
+                      secondary_text:
+                        location?.structured_formatting?.secondary_text,
+                    })
                   }
                 >
                   <div className="flex flex-col gap-1 p-2   rounded-md group cursor-pointer">
@@ -99,10 +125,33 @@ const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
             className="flex flex-col gap-1 p-5 border border-gray-300 rounded-md group cursor-pointer"
             onClick={() => {
               navigator.geolocation.getCurrentPosition((position) => {
+                console.log(position);
                 const { latitude, longitude } = position.coords;
-                console.log(latitude, longitude);
+                // console.log(latitude, longitude);
 
-                dispatch(setLocation({ lat: latitude, long: longitude }));
+                const currentAddress = {
+                  main_text: "Current Location",
+                  secondary_text: "",
+                };
+
+                dispatch(
+                  setLocation({
+                    lat: latitude,
+                    long: longitude,
+                    address: currentAddress,
+                  })
+                );
+
+                localStorage.setItem(
+                  "location",
+                  JSON.stringify({
+                    lat: latitude,
+                    long: longitude,
+                    address: currentAddress,
+                  })
+                );
+
+                console.log(localStorage.getItem("location"));
 
                 setLocationSideBar(false);
               });

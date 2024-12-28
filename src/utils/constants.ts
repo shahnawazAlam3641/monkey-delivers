@@ -8,6 +8,9 @@ export const createApiUrls = (lat, long) => {
     CUISINE_CATEGORY_API: (collectioId) =>
       `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${lat}&lng=${long}&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null&collection=${collectioId}`,
 
+    SEARCH_SUGG_API: (searchText) =>
+      `https://www.swiggy.com/dapi/restaurants/search/suggest?lat=${lat}&lng=${long}&trackingId=undefined&str=${searchText}`,
+
     SEARCH_DISH_API: (dish) =>
       `https://www.swiggy.com/dapi/restaurants/search/v3?lat=${lat}&lng=${long}&submitAction=SUGGESTION&str=${dish}`,
 

@@ -35,8 +35,12 @@ const Header = () => {
           className="text-white cursor-pointer flex gap-3 *:justify-center items-center group"
           onClick={() => setLocationSideBar(true)}
         >
-          <span className="group-hover:underline  py-1 font-medium">Other</span>{" "}
-          <span className="text-gray-400 text-sm">{currentLocation}</span>
+          <span className="group-hover:underline  py-1 font-medium">
+            {currentLocation.main_text}
+          </span>{" "}
+          <span className="text-gray-400 text-sm">
+            {currentLocation.secondary_text}
+          </span>
         </p>
       </div>
 
