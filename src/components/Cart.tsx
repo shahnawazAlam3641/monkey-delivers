@@ -159,27 +159,22 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, removeItem } from "../utils/cartSlice";
+import EmptyCart from "./EmptyCart";
 
 const Cart = () => {
   const dispatch = useDispatch();
 
-  // State to store the total price of items
   const [itemTotal, setItemTotal] = useState(0);
 
-  // Access the cart items from the Redux store
   const cartItems = useSelector((store) => store.cart.items);
 
-  // State to keep track of item counts
   const [itemCounts, setItemCounts] = useState({});
 
-  // Fixed fees for delivery and platform
   const deliveryFee = 75;
   const platformFee = 10;
 
-  // Calculate GST based on the item total (18% of item total)
   const GST = (itemTotal * 18) / 100;
 
-  // Effect to calculate item totals and counts whenever cartItems changes
   useEffect(() => {
     const total = cartItems.reduce(
       (sum, cartFood) => sum + cartFood.itemPrice,
@@ -187,7 +182,6 @@ const Cart = () => {
     );
     setItemTotal(total);
 
-    // Calculate the count of each item
     const counts = cartItems.reduce((acc, item) => {
       const key = item?.title || item?.card?.info?.name;
       acc[key] = (acc[key] || 0) + 1;
@@ -196,9 +190,15 @@ const Cart = () => {
     setItemCounts(counts);
   }, [cartItems]);
 
+  console.log(cartItems);
+
+  if (cartItems.length == 0) {
+    return <EmptyCart />;
+  }
+
   return (
-    <div className="bg-slate-100 p-4 h-full flex justify-center items-center">
-      <div className="bg-white w-[350px] p-4 rounded-sm flex flex-col gap-4">
+    <div className=" p-4 h-full flex justify-center items-center">
+      <div className="bg-white w-[350px] p-4 rounded-sm flex flex-col gap-4 shadow-xl max-w-[85%]">
         {/* Cart Header */}
         <div className="flex">
           <p className="border-b-2 font-bold">Your Cart</p>
@@ -216,12 +216,10 @@ const Cart = () => {
                 key={key}
                 className="flex justify-between items-center w-full gap-4"
               >
-                {/* Food Item Name */}
                 <p className="w-[55%] text-nowrap truncate hover:text-wrap">
                   {cartFood?.card?.info?.name || cartFood?.title}
                 </p>
 
-                {/* Quantity Controls */}
                 <div className="w-[25%] flex gap-2 justify-center items-center border-[1px] border-solid border-slate-200 p-1">
                   <button
                     className="border-r-[1px] border-slate-200 px-1 font-semibold text-gray-400"
@@ -238,7 +236,6 @@ const Cart = () => {
                   </button>
                 </div>
 
-                {/* Item Price */}
                 <p className="w-[20%] text-end">
                   ₹{Math.round(cartFood?.itemPrice)}
                 </p>
@@ -247,14 +244,12 @@ const Cart = () => {
           })}
         </div>
 
-        {/* Suggestion Input */}
         <input
           className="w-full bg-slate-100 p-2 rounded-sm"
           type="text"
           placeholder="Any suggestions? We will pass it on..."
         />
 
-        {/* No-Contact Delivery Option */}
         <div>
           <div className="flex gap-3 items-center">
             <input type="checkbox" id="checkbox" />
@@ -266,17 +261,14 @@ const Cart = () => {
           </p>
         </div>
 
-        {/* Bill Details */}
         <div className="flex flex-col">
           <p>Bill Details</p>
 
-          {/* Item Total */}
           <div className="flex justify-between">
             <p className="text-gray-400 text-base">Item Total</p>
             <p className="text-gray-400 text-base">₹{Math.round(itemTotal)}</p>
           </div>
 
-          {/* Delivery Fee */}
           <div className="flex justify-between">
             <p className="text-gray-400 text-base">Delivery Fee</p>
             <p className="text-gray-400 text-base">₹{deliveryFee}</p>
@@ -284,13 +276,11 @@ const Cart = () => {
 
           <div className="w-full h-[1px] bg-slate-200 my-1"></div>
 
-          {/* Platform Fee */}
           <div className="flex justify-between">
             <p className="text-gray-400 text-base">Platform Fee</p>
             <p className="text-gray-400 text-base">₹{platformFee}</p>
           </div>
 
-          {/* GST */}
           <div className="flex justify-between">
             <p className="text-gray-400 text-base">GST</p>
             <p className="text-gray-400 text-base">₹{Math.round(GST)}</p>
@@ -298,7 +288,6 @@ const Cart = () => {
 
           <div className="w-full h-[1px] bg-black my-1"></div>
 
-          {/* Total Amount */}
           <div className="flex justify-between">
             <p>To Pay</p>
             <p>₹{Math.round(itemTotal + deliveryFee + platformFee + GST)}</p>

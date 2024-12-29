@@ -11,6 +11,7 @@ import DishSearchCard from "./DishSearchCard";
 import CuisineRestSearchCard from "./CuisineRestSearchCard";
 import SearchShimmer from "./SearchShimmer";
 import { useApiUrls } from "../utils/useApiUrls";
+import LoadingGif from "../assets/Food Loader - GIF Animation.gif";
 // import { SEARCH_SUGG_API } from '../constants'
 
 const Search = () => {
@@ -133,19 +134,30 @@ const Search = () => {
             placeholder="Search for Restaurants and Food"
           />
           {searchText.length > 0 ? (
-            <p
+            // <p
+
+            //   className="absolute right-[5%] cursor-pointer top-1/2 -translate-y-1/2 "
+            // >
+            //   X
+            // </p>
+
+            <svg
               onClick={() => setSearchText("")}
-              className="absolute right-[5%] cursor-pointer top-1/2 -translate-y-1/2 "
+              className="absolute right-4 cursor-pointer top-1/2 w-4 -translate-y-1/2 "
+              fill="#313131"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 384 512"
             >
-              X
-            </p>
+              {/*!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.*/}
+              <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+            </svg>
           ) : null}
         </div>
 
         {loading && (
           <div className="w-full">
-            {Array.from(Array(10)).map(() => {
-              return <SearchShimmer />;
+            {Array.from(Array(10)).map((n, index) => {
+              return <SearchShimmer key={index} />;
             })}
           </div>
         )}
@@ -280,10 +292,15 @@ const Search = () => {
                     setSugg(null);
                   }}
                   key={index}
-                  className="w-[80%] flex gap-4 p-2  hover:bg-slate-200 rounded-md"
+                  className="w-[80%] flex gap-4 p-2 cursor-pointer transition-all duration-200 hover:bg-slate-200 rounded-md"
                 >
                   <img
-                    src={claudinaryImgCDN + suggestion.cloudinaryId}
+                    src={
+                      !suggestion.cloudinaryId
+                        ? "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/Icons-Autosuggest/AS_Cuisine_3x"
+                        : claudinaryImgCDN + suggestion.cloudinaryId
+                    }
+                    // src={`${!suggestion.cloudinaryId ? "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/Icons-Autosuggest/AS_Cuisine_3x" : ${claudinaryImgCDN}${suggestion.cloudinaryId}}`}
                     alt="Suggestion"
                     className="w-20 h-20 object-cover rounded-lg"
                   />
@@ -318,7 +335,7 @@ const Search = () => {
                     )
                   }
                   key={searchCuisine.id}
-                  className="w-24"
+                  className="w-24 cursor-pointer"
                   src={
                     "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/" +
                     searchCuisine.imageId
@@ -330,6 +347,8 @@ const Search = () => {
         </div>
       </div>
     );
+  } else {
+    return <img src={LoadingGif} alt="Loading" className="w-96 m-auto" />;
   }
 };
 

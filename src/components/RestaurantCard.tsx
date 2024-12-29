@@ -19,7 +19,12 @@ const RestaurantCard = ({ restaurant }) => {
     <div className="cursor-pointer flex flex-col w-56 overflow-scroll truncate transition-all  duration-200 hover:scale-95  ">
       <img
         className="w-56 h-36 object-cover rounded-lg"
-        src={claudinaryImgCDN + cloudinaryImageId}
+        // src={claudinaryImgCDN + cloudinaryImageId}
+        src={
+          !cloudinaryImageId
+            ? "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/Icons-Autosuggest/AS_Cuisine_3x"
+            : claudinaryImgCDN + cloudinaryImageId
+        }
       />
       <p className="font-bold text-ellipsis">{name}</p>
       <p className="flex items-center gap-1 font-semibold">

@@ -6,6 +6,7 @@ import RestaurantMenuHeader from "./RestaurantMenuHeader";
 import RestaurantMenuItemCards from "./RestaurantMenuItemCards";
 import RestaurantMenuCarousel from "./RestaurantMenuCarousel";
 import RestaurantMenuCategories from "./RestaurantMenuCategories";
+import RestaurantMenuShimmer from "./RestaurantMenuShimmer";
 
 const RestaurantMenu = () => {
   const [accordianOpen, setAccordionOpen] = useState(1);
@@ -31,7 +32,7 @@ const RestaurantMenu = () => {
 
   // console.log(menu)
 
-  if (!menu) return <h1>Loading MEnu</h1>;
+  if (!menu) return <RestaurantMenuShimmer />;
 
   // const {
   //   id,

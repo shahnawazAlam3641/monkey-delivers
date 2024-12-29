@@ -63,7 +63,12 @@ const GroceryCategoryItems = () => {
           <div className="flex items-center">
             <img
               className="w-14"
-              src={claudinaryImgCDN + categoryInfo?.imageId}
+              // src={claudinaryImgCDN + categoryInfo?.imageId}
+              src={
+                !categoryInfo?.imageId
+                  ? "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/Icons-Autosuggest/AS_Cuisine_3x"
+                  : claudinaryImgCDN + categoryInfo?.imageId
+              }
             />
             <p>{categoryInfo?.displayName}</p>
           </div>

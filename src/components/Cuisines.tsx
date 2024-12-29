@@ -5,6 +5,7 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 import { useNavigate } from "react-router-dom";
 import { useApiUrls } from "../utils/useApiUrls";
 import { useSelector } from "react-redux";
+import ShimmerCard from "./ShimmerCard";
 
 const Cuisines = () => {
   const [cuisines, setCuisines] = useState(null);
@@ -41,11 +42,17 @@ const Cuisines = () => {
   // console.log(onlineStatus);
 
   if (onlineStatus === false) {
-    return <h1>uh ohhh... looks like youre offline</h1>;
+    return <h1>uh ohhh... looks like you are offline</h1>;
   }
 
   if (!cuisines) {
-    return <h1>Loading.................</h1>;
+    return (
+      <div className="max-w-[80%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {Array.from(Array(12)).map((n, index) => (
+          <ShimmerCard key={index} />
+        ))}
+      </div>
+    );
   }
 
   if (cuisines?.data?.cards[0]?.card?.card?.header) {
@@ -85,9 +92,14 @@ const Cuisines = () => {
               return (
                 <img
                   onClick={() => navigate(`/collection/${collectionId}`)}
-                  className="w-40"
+                  className="w-40 cursor-pointer"
                   key={cuisine.id}
-                  src={CUISINE_IMG_CDN + cuisine.imageId}
+                  // src={CUISINE_IMG_CDN + cuisine.imageId}
+                  src={
+                    !cuisine.imageId
+                      ? "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/Icons-Autosuggest/AS_Cuisine_3x"
+                      : CUISINE_IMG_CDN + cuisine.imageId
+                  }
                 />
               );
             })}

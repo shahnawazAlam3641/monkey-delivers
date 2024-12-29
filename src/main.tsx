@@ -10,6 +10,7 @@ import Cart from "./components/Cart.tsx";
 import Help from "./components/Help.tsx";
 import Search from "./components/Search.tsx";
 import Body from "./components/Body.tsx";
+import Error from "./components/Error.tsx";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 const GroceryCategoryItems = lazy(
@@ -20,7 +21,12 @@ const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+
     children: [
+      {
+        path: "*",
+        element: <Error />,
+      },
       {
         path: "/",
         element: <Body />,

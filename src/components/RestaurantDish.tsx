@@ -78,12 +78,15 @@ const RestaurantDish = ({ showItems, item }) => {
         <p className="text-slate-600">{item?.card?.info?.description}</p>
       </div>
       <div className=" flex flex-col justify-center items-center gap-1 min-w-32">
-        {item?.card?.info?.imageId ? (
-          <img
-            className="w-32 h-32 min-w-32 min-h-32  object-cover rounded-lg"
-            src={claudinaryImgCDN + item?.card?.info?.imageId}
-          />
-        ) : null}
+        <img
+          className="w-32 h-32 min-w-32 min-h-32  object-cover rounded-lg"
+          // src={claudinaryImgCDN + item?.card?.info?.imageId}
+          src={
+            !item?.card?.info?.imageId
+              ? "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/Icons-Autosuggest/AS_Cuisine_3x"
+              : claudinaryImgCDN + item?.card?.info?.imageId
+          }
+        />
 
         {/* <img
                   className="w-32 h-32 min-w-32 min-h-32  object-cover rounded-lg"

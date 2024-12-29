@@ -1,5 +1,7 @@
 export const createApiUrls = (lat, long) => {
   const urlObj = {
+    LOCATION_INFO_API: `https://www.swiggy.com/dapi/misc/address-recommend?latlng=${lat}%2C${long}`,
+
     MAIN_API: `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${lat}&lng=${long}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`,
 
     RESTAURANT_MENU_API: (restaurantId) =>

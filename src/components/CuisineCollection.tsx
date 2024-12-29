@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard";
 import { useApiUrls } from "../utils/useApiUrls";
+import ShimmerCard from "./ShimmerCard";
 // import { CUISINE_CATEGORY_API } from "../utils/constants";
 
 const CuisineCollection = () => {
   const [cuisineCollection, setCuisineCollection] = useState([]);
-  const CUISINE_CATEGORY_API = `https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.5399241&lng=88.3874402&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null&collection=`;
   const [collectionInfo, setCollectionInfo] = useState(null);
 
   const { collectionId } = useParams();
@@ -38,26 +38,42 @@ const CuisineCollection = () => {
     }
   }, []);
 
-  return (
-    <>
-      <div className="max-w-[85%] mx-auto p-5">
-        <p className="text-5xl font-bold">{collectionInfo?.title}</p>
-        <p className="font-medium">{collectionInfo?.description}</p>
+  if (cuisineCollection.length == 0) {
+    return (
+      <div className="w-[80%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-[90%] mx-auto">
+        {" "}
+        {Array.from(Array(12)).map((n, index) => {
+          return <ShimmerCard key={index} />;
+        })}{" "}
       </div>
-      <div className="grid grid-cols-1 gap-5 p-5 md:grid-cols-3 lg:grid-cols-4 max-w-[85%] mx-auto">
+    );
+  }
+
+  return (
+    <div className="max-w-[85%] w-[70%] mx-auto">
+      <div className=" mx-auto p-5">
+        <p className="text-5xl text-[#171A29] font-bold">
+          {collectionInfo?.title}
+        </p>
+        <p className="font-medium text-[#171A29]">
+          {collectionInfo?.description}
+        </p>
+      </div>
+      <div className="grid grid-cols-1  gap-3 py-5 md:grid-cols-2 lg:grid-cols-3   mx-auto">
         {cuisineCollection.map((cardData) => {
           // console.log(cardData?.card);
           return (
             <Link
               to={"/restaurant/" + cardData?.card?.card?.info?.id}
               key={cardData?.card?.card?.info?.id}
+              className="mx-auto"
             >
               <RestaurantCard restaurant={cardData?.card?.card} />
             </Link>
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 
