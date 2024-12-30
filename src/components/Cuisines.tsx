@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useApiUrls } from "../utils/useApiUrls";
 import { useSelector } from "react-redux";
 import ShimmerCard from "./ShimmerCard";
+const BYPASS_CORS = import.meta.env.VITE_BYPASS_CORS_URL;
 
 const Cuisines = () => {
   const [cuisines, setCuisines] = useState(null);
@@ -27,7 +28,13 @@ const Cuisines = () => {
       // const response = await fetch(
       //   "https://thingproxy.freeboard.io/fetch/" + MAIN_API
       // );
-      const response = await fetch(urls?.MAIN_API);
+      const response = await fetch(BYPASS_CORS, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Set the content type
+        },
+        body: JSON.stringify({ url: urls?.MAIN_API }),
+      });
 
       // const response = await fetch('https://corsproxy.org/?' + encodeURIComponent(MAIN_API))
       // const response = await fetch(DEV_API)

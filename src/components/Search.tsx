@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+const BYPASS_CORS = import.meta.env.VITE_BYPASS_CORS_URL;
 import {
   PRE_SEARCH_API,
   SEARCH_CUISINE_API,
@@ -39,7 +40,21 @@ const Search = () => {
     // const response = await fetch(DEV_API)
 
     // const response = await fetch('https://thingproxy.freeboard.io/fetch/' + PRE_SEARCH_API)
-    const response = await fetch(urls?.PRE_SEARCH_API);
+    // const response = await fetch("http://localhost:3000/api", {
+    //   method: "POST",
+    //   body: { url: urls?.PRE_SEARCH_API },
+    // });
+
+    const response = await fetch(BYPASS_CORS, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", // Set the content type
+      },
+      body: JSON.stringify({ url: urls?.PRE_SEARCH_API }),
+    });
+
+    console.log(urls?.PRE_SEARCH_API);
+    console.log(response);
 
     const json = await response.json();
     // console.log(json);
@@ -64,7 +79,13 @@ const Search = () => {
   const getDishes = async (dish) => {
     try {
       setLoading(true);
-      const response = await fetch(urls?.SEARCH_DISH_API(dish));
+      const response = await fetch(BYPASS_CORS, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Set the content type
+        },
+        body: JSON.stringify({ url: urls?.SEARCH_DISH_API(dish) }),
+      });
       const data = await response.json();
       // console.log(data?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards);
       setDishes(data?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards);
@@ -78,7 +99,13 @@ const Search = () => {
   const getSearchCuisine = async (cuisine) => {
     try {
       setLoading(true);
-      const response = await fetch(urls?.SEARCH_CUISINE_API(cuisine));
+      const response = await fetch(BYPASS_CORS, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Set the content type
+        },
+        body: JSON.stringify({ url: urls?.SEARCH_CUISINE_API(cuisine) }),
+      });
       const data = await response.json();
       console.log(
         data?.data?.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards
@@ -101,7 +128,13 @@ const Search = () => {
       //     `https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.7040592&lng=77.10249019999999&str=${searchText}&trackingId=undefined`
       // );
       setLoading(true);
-      const response = await fetch(urls?.SEARCH_SUGG_API(searchText));
+      const response = await fetch(BYPASS_CORS, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Set the content type
+        },
+        body: JSON.stringify({ url: urls?.SEARCH_SUGG_API(searchText) }),
+      });
 
       const json = await response.json();
       // console.log(json);

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setLocation } from "../utils/locationSlice";
 import { LOCATION_API, SWIGGY_COORDS_API } from "../utils/constants";
 import { useApiUrls } from "../utils/useApiUrls";
+const BYPASS_CORS = import.meta.env.VITE_BYPASS_CORS_URL;
 
 const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
   const [locationInput, setLocationInput] = useState("");
@@ -12,7 +13,13 @@ const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
 
   const getLocationSugg = async () => {
     try {
-      const response = await fetch(LOCATION_API + locationInput);
+      const response = await fetch(BYPASS_CORS, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Set the content type
+        },
+        body: JSON.stringify({ url: LOCATION_API + locationInput }),
+      });
       const data = await response.json();
       // console.log(data);
       setLocationData(data?.data);
@@ -23,7 +30,13 @@ const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
 
   const getCoords = async (placeId, address) => {
     try {
-      const response = await fetch(SWIGGY_COORDS_API + placeId);
+      const response = await fetch(BYPASS_CORS, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Set the content type
+        },
+        body: JSON.stringify({ url: SWIGGY_COORDS_API + placeId }),
+      });
       const data = await response.json();
       console.log(data);
 
@@ -139,7 +152,13 @@ const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
                 // console.log(latitude, longitude);
 
                 try {
-                  const response = await fetch(urls.LOCATION_INFO_API);
+                  const response = await fetch(BYPASS_CORS, {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json", // Set the content type
+                    },
+                    body: JSON.stringify({ url: urls.LOCATION_INFO_API }),
+                  });
                   const data = await response.json();
 
                   dispatch(

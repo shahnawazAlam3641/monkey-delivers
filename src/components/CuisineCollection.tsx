@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard";
 import { useApiUrls } from "../utils/useApiUrls";
 import ShimmerCard from "./ShimmerCard";
+const BYPASS_CORS = import.meta.env.VITE_BYPASS_CORS_URL;
+
 // import { CUISINE_CATEGORY_API } from "../utils/constants";
 
 const CuisineCollection = () => {
@@ -15,7 +17,13 @@ const CuisineCollection = () => {
   //   console.log(params);
 
   const fetchCollectionRestaurants = async () => {
-    const response = await fetch(urls?.CUISINE_CATEGORY_API(collectionId));
+    const response = await fetch(BYPASS_CORS, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", // Set the content type
+      },
+      body: JSON.stringify({ url: urls?.CUISINE_CATEGORY_API(collectionId) }),
+    });
     const data = await response.json();
 
     const filteredRest = data?.data?.cards.filter((cardData) => {
