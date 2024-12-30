@@ -1,20 +1,20 @@
 import { lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.tsx";
+import App from "./App.jsx";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import CuisineCollection from "./components/CuisineCollection.tsx";
-import RestaurantMenu from "./components/RestaurantMenu.tsx";
-import Login from "./components/Login.tsx";
-import Cart from "./components/Cart.tsx";
-import Help from "./components/Help.tsx";
-import Search from "./components/Search.tsx";
-import Body from "./components/Body.tsx";
-import Error from "./components/Error.tsx";
+import CuisineCollection from "./components/CuisineCollection.jsx";
+import RestaurantMenu from "./components/RestaurantMenu.jsx";
+import Login from "./components/Login.jsx";
+import Cart from "./components/Cart.jsx";
+import Help from "./components/Help.jsx";
+import Search from "./components/Search.jsx";
+import Body from "./components/Body.jsx";
+import Error from "./components/Error.jsx";
 
 const Grocery = lazy(() => import("./components/Grocery"));
-const GroceryCategoryItems = lazy(
-  () => import("./components/GroceryCategoryItems")
+const GroceryCategoryItems = lazy(() =>
+  import("./components/GroceryCategoryItems")
 );
 
 const appRouter = createBrowserRouter([
@@ -77,6 +77,6 @@ const appRouter = createBrowserRouter([
   },
 ]);
 
-createRoot(document.getElementById("root")!).render(
+createRoot(document.getElementById("root")).render(
   <RouterProvider router={appRouter} />
 );

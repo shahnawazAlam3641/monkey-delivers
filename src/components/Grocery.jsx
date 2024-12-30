@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { GROCERY_HOME_API, claudinaryImgCDN } from "../utils/constants";
+import { GROCERY_HOME_API } from "../utils/constants";
 import GroceryNav from "./GroceryNav";
-import { claudinaryImgCDN } from "../utils/constants";
 import GroceryCategoryCard from "./GroceryCategoryCard";
 import { Link } from "react-router-dom";
 import { useApiUrls } from "../utils/useApiUrls";
