@@ -3,9 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard";
 import { useApiUrls } from "../utils/useApiUrls";
 import ShimmerCard from "./ShimmerCard";
-const BYPASS_CORS = import.meta.env.VITE_BYPASS_CORS_URL;
 
-// import { CUISINE_CATEGORY_API } from "../utils/constants";
+const BYPASS_CORS = import.meta.env.VITE_BYPASS_CORS_URL;
 
 const CuisineCollection = () => {
   const [cuisineCollection, setCuisineCollection] = useState([]);
@@ -14,13 +13,12 @@ const CuisineCollection = () => {
   const { collectionId } = useParams();
 
   const urls = useApiUrls();
-  //   console.log(params);
 
   const fetchCollectionRestaurants = async () => {
     const response = await fetch(BYPASS_CORS, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", // Set the content type
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ url: urls?.CUISINE_CATEGORY_API(collectionId) }),
     });
@@ -31,8 +29,6 @@ const CuisineCollection = () => {
         return cardData;
       }
     });
-
-    console.log(filteredRest);
 
     setCollectionInfo(data?.data?.cards[0]?.card?.card);
     setCuisineCollection(filteredRest);
@@ -69,7 +65,6 @@ const CuisineCollection = () => {
       </div>
       <div className="grid grid-cols-1  gap-3 py-5 md:grid-cols-2 lg:grid-cols-3   mx-auto">
         {cuisineCollection.map((cardData) => {
-          // console.log(cardData?.card);
           return (
             <Link
               to={"/restaurant/" + cardData?.card?.card?.info?.id}

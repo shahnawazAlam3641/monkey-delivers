@@ -16,12 +16,11 @@ const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
       const response = await fetch(BYPASS_CORS, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", // Set the content type
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ url: LOCATION_API + locationInput }),
       });
       const data = await response.json();
-      // console.log(data);
       setLocationData(data?.data);
     } catch (error) {
       console.log(error);
@@ -33,19 +32,14 @@ const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
       const response = await fetch(BYPASS_CORS, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", // Set the content type
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ url: SWIGGY_COORDS_API + placeId }),
       });
       const data = await response.json();
-      console.log(data);
 
       const lat = data?.data[0]?.geometry?.location?.lat;
       const long = data?.data[0]?.geometry?.location?.lng;
-
-      // console.log({ lat: lat, long: long, address: address });
-
-      console.log(data?.data[0]);
 
       dispatch(
         setLocation({
@@ -68,8 +62,6 @@ const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
           },
         })
       );
-
-      console.log(localStorage.getItem("location"));
     } catch (error) {
       console.log(error);
     }
@@ -78,7 +70,6 @@ const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
   useEffect(() => {
     let timeout;
 
-    // console.log(locationInput.length > 1);
     if (locationInput.length > 1) {
       timeout = setTimeout(() => {
         getLocationSugg();
@@ -117,7 +108,6 @@ const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
 
           {locationData &&
             locationData.map((location) => {
-              // console.log(location);
               return (
                 <div
                   key={location?.place_id}
@@ -147,15 +137,13 @@ const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
             className="flex flex-col gap-1 p-5 border border-gray-300 rounded-md group cursor-pointer"
             onClick={() => {
               navigator.geolocation.getCurrentPosition(async (position) => {
-                console.log(position);
                 const { latitude, longitude } = position.coords;
-                // console.log(latitude, longitude);
 
                 try {
                   const response = await fetch(BYPASS_CORS, {
                     method: "POST",
                     headers: {
-                      "Content-Type": "application/json", // Set the content type
+                      "Content-Type": "application/json",
                     },
                     body: JSON.stringify({ url: urls.LOCATION_INFO_API }),
                   });
@@ -185,13 +173,9 @@ const LocationSidebar = ({ locationSideBar, setLocationSideBar }) => {
                       },
                     })
                   );
-
-                  console.log(data);
                 } catch (error) {
                   console.log(error);
                 }
-
-                console.log(localStorage.getItem("location"));
 
                 setLocationSideBar(false);
               });

@@ -6,10 +6,6 @@ import { removeItem } from "../utils/cartSlice";
 import FoodBtn from "./FoodBtn";
 
 const RestaurantDish = ({ showItems, item }) => {
-  // const [itemCount, setItemCount] = useState(0);
-
-  // const dispatch = useDispatch();
-
   return (
     <div
       className={`my-2  justify-between w-full max-w-[90vw] mx-auto p-4  rounded-lg ${
@@ -88,54 +84,17 @@ const RestaurantDish = ({ showItems, item }) => {
           }
         />
 
-        {/* <img
-                  className="w-32 h-32 min-w-32 min-h-32  object-cover rounded-lg"
-                  src={claudinaryImgCDN + item?.card?.info?.imageId}
-                /> */}
         <button className="bg-green-400 px-5 py-1  hidden rounded-md text-white shadow-lg hover:bg-green-600 ">
           ADD
         </button>
 
         <FoodBtn
-          // handleAdd={handleAdd}
-          // itemCount={itemCount}
-          // dispatch={dispatch}
-          // setItemCount={setItemCount}
           item={item}
           price={
             item?.card?.info?.price / 100 ||
             item?.card?.info?.defaultPrice / 100
           }
         />
-        {/* <div className=" flex items-center   bg-white justify-center rounded-md shadow-lg  ">
-          <button
-            onClick={() => {
-              if (itemCount === 0) {
-                return;
-              } else {
-                const count = itemCount - 1;
-                setItemCount(count);
-                dispatch(removeItem());
-              }
-            }}
-            className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-l-md transition-all"
-          >
-            -
-          </button>
-          <p className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg transition-all">
-            {itemCount}
-          </p>
-          <button
-            onClick={() => {
-              const count = itemCount + 1;
-              setItemCount(count);
-              handleAdd(item);
-            }}
-            className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-r-md transition-all"
-          >
-            +
-          </button>
-        </div> */}
       </div>
     </div>
   );

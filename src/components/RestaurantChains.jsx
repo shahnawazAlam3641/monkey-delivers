@@ -8,9 +8,6 @@ const RestaurantChains = ({ cuisine }) => {
   const [rating, setRating] = useState(false);
   const [fast, setFast] = useState(false);
 
-  // const RestaurantWithDiscount = DiscountedRestaurant(RestaurantCard);
-  // console.log(RestaurantWithDiscount);
-
   const handleAll = () => {
     if (!all) {
       setAll(true);
@@ -44,7 +41,6 @@ const RestaurantChains = ({ cuisine }) => {
     const restaurantArray =
       cuisine?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants;
-    // console.log(cuisine?.data?.cards[2]?.card?.card?.title)
 
     restaurants = [...restaurantArray];
   }
@@ -56,7 +52,6 @@ const RestaurantChains = ({ cuisine }) => {
     const restaurantArray =
       cuisine?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants;
-    // console.log(cuisine?.data?.cards[2]?.card?.card?.title)
 
     restaurants = [...restaurantArray];
   }
@@ -94,34 +89,13 @@ const RestaurantChains = ({ cuisine }) => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 max-w-[80%] mx-auto  gap-[3.8rem]  mt-10 ">
-        {/* {if(all){
-      restaurants.map((restaurant)=>{
-        console.log(all)
-        console.log(restaurant)
-      return <RestaurantCard key={restaurant?.info?.id} restaurant={restaurant}/>
-      })
-      }else if(fast){
-        restaurants.map((restaurant)=>{
-          if(restaurant){
-
-          }
-        })
-      }} */}
-
         {all &&
           restaurants.map((restaurant) => {
-            // console.log(restaurant);
             return (
               <Link
                 to={"/restaurant/" + restaurant?.info?.id}
                 key={restaurant?.info?.id}
               >
-                {/* {restaurant?.info?.aggregatedDiscountInfoV3 ? (
-                  <RestaurantWithDiscount restaurant={restaurant} />
-                ) : (
-                  <RestaurantCard restaurant={restaurant} />
-                )} */}
-
                 <RestaurantCard restaurant={restaurant} />
               </Link>
             );

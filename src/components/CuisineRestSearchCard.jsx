@@ -12,9 +12,6 @@ const CuisineRestSearchCard = ({ cuisineRest }) => {
     >
       <img
         className="w-24 aspect-square object-cover rounded-md"
-        // src={
-        //   claudinaryImgCDN + cuisineRest?.card?.card?.info?.cloudinaryImageId
-        // }
         src={
           !cuisineRest?.card?.card?.info?.cloudinaryImageId
             ? "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/Icons-Autosuggest/AS_Cuisine_3x"
@@ -66,8 +63,6 @@ const CuisineRestSearchCard = ({ cuisineRest }) => {
               cuisineRest?.card?.card?.info?.avgRatingString}{" "}
             ({cuisineRest?.card?.card?.info?.totalRatingsString} ratings){" "}
           </p>
-          {/* <p className="text-gray-500 font-semibold text-md">Azad </p>
-          <p className="text-gray-500 font-semibold text-md">Azad</p> */}
         </div>
         <p className="text-gray-400 font-semibold text-sm">
           {cuisineRest?.card?.card?.info?.cuisines.map((cuisine) => {

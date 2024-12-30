@@ -3,7 +3,6 @@ import React from "react";
 import { claudinaryImgCDN } from "../utils/constants";
 
 const RestaurantCard = ({ restaurant }) => {
-  // console.log(restaurant);
   const {
     id,
     name,
@@ -14,12 +13,10 @@ const RestaurantCard = ({ restaurant }) => {
     sla: { slaString },
   } = restaurant?.info;
 
-  // console.log(restaurant?.info?.cloudinaryImageId)
   return (
     <div className="cursor-pointer flex flex-col w-56 overflow-scroll truncate transition-all  duration-200 hover:scale-95  ">
       <img
         className="w-56 h-36 object-cover rounded-lg"
-        // src={claudinaryImgCDN + cloudinaryImageId}
         src={
           !cloudinaryImageId
             ? "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/Icons-Autosuggest/AS_Cuisine_3x"
@@ -70,21 +67,5 @@ const RestaurantCard = ({ restaurant }) => {
     </div>
   );
 };
-
-// export const DiscountedRestaurant = (WrappedComp) => {
-//   return (props) => {
-//     console.log(props.restaurant?.info?.aggregatedDiscountInfoV3);
-//     return (
-//       <div className="relative">
-//         <p className="absolute z-10 bg-[#171A29] text-white bottom-24">
-//           {props.restaurant?.info?.aggregatedDiscountInfoV3.header +
-//             " " +
-//             props.restaurant?.info?.aggregatedDiscountInfoV3?.subHeader}
-//         </p>
-//         <WrappedComp {...props} />
-//       </div>
-//     );
-//   };
-// };
 
 export default RestaurantCard;

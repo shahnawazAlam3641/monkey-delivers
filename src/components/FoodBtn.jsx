@@ -12,12 +12,6 @@ const FoodBtn = ({ item, price, deliveryFee }) => {
     itemDeliveryFee: deliveryFee,
   };
 
-  // console.log(updatedItem);
-
-  // console.log(
-  //   "firstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirstfirst"
-  // );
-
   const [itemCount, setItemCount] = useState(0);
 
   const cartItems = useSelector((store) => store.cart.items);
@@ -27,7 +21,6 @@ const FoodBtn = ({ item, price, deliveryFee }) => {
   useEffect(() => {
     const filteredFood = cartItems.filter((food) => {
       if (food?.title) {
-        console.log("here buddy");
         return food?.title === updatedItem?.title;
       } else {
         return food?.card?.info?.name === updatedItem?.card?.info?.name;
@@ -43,18 +36,7 @@ const FoodBtn = ({ item, price, deliveryFee }) => {
           itemCount ? "hidden" : "block"
         }`}
         onClick={() => {
-          // const count = itemCount + 1;
-          // setItemCount(count);
           dispatch(addItem(updatedItem));
-          // const totalItem = cartItems.filter(
-          //   (food) =>
-          //     food?.title === item?.title ||
-          //     food?.card?.info?.name === item?.card?.info?.name
-          // );
-
-          // console.log(totalItem);
-          // setItemCount(totalItem.length);
-          // handleAdd(item);
         }}
       >
         ADD
@@ -83,18 +65,7 @@ const FoodBtn = ({ item, price, deliveryFee }) => {
         </p>
         <button
           onClick={() => {
-            // const count = itemCount + 1;
-            // setItemCount(count);
             dispatch(addItem(updatedItem));
-            // const totalItem = cartItems.filter(
-            //   (food) =>
-            //     food?.title === item?.title ||
-            //     food?.card?.info?.name === item?.card?.info?.name
-            // );
-
-            // console.log(totalItem);
-            // setItemCount(totalItem.length);
-            // handleAdd(item);
           }}
           className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-r-md transition-all"
         >

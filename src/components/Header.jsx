@@ -2,10 +2,8 @@ import logo from "../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setLocation } from "../utils/locationSlice";
 import { useState } from "react";
 import LocationSidebar from "./LocationSidebar";
-import { useApiUrls } from "../utils/useApiUrls";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -13,8 +11,6 @@ const Header = () => {
     return store.cart.items;
   });
   const currentLocation = useSelector((store) => store?.location?.address);
-
-  console.log(currentLocation);
 
   const [locationSideBar, setLocationSideBar] = useState(false);
 

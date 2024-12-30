@@ -4,20 +4,9 @@ import FoodBtn from "./FoodBtn";
 import { useDispatch } from "react-redux";
 
 const RestaurantMenuCategories = ({ menuType }) => {
-  // const [itemCount, setItemCount] = useState(0);
-
-  // const dispatch = useDispatch();
-  // const [accordianOpen, setAccordianOpen] = useState(false);
-
   const [categoryAccordianOpen, setCategoryAccordianOpen] = useState({});
 
-  // const handleAccordian = () => {
-  //   console.log("clicked");
-  //   setAccordianOpen(!accordianOpen);
-  // };
-
   const handleCategoryAccordian = (itemTitle) => {
-    console.log("clicked");
     setCategoryAccordianOpen((previousState) => {
       const newState = { ...previousState };
       newState[itemTitle] = !previousState[itemTitle];
@@ -27,35 +16,18 @@ const RestaurantMenuCategories = ({ menuType }) => {
 
   return (
     <div className="w-[850px] max-w-[90vw] mx-auto my-6 ">
-      {/* <h1 className="bg-blue-300" onClick={handleAccordian}>
-        {menuType?.card?.card?.title}
-      </h1> */}
-
       <div className="w-full bg-slate-200 h-3"></div>
 
       <h1 className="font-bold text-lg p-2 ">{menuType?.card?.card?.title}</h1>
       {menuType?.card?.card?.categories.map((categoryItem) => {
         const categoryId = categoryItem?.title;
-        const isOpen = categoryAccordianOpen[categoryId]; // Check if the accordion is open
+        const isOpen = categoryAccordianOpen[categoryId];
 
-        {
-          /* const isOpen = categoryAccordianOpen[categoryItem.title]; */
-        }
         return (
           <div
             key={categoryItem?.title}
             className="font-semibold text-lg p-2 flex flex-col gap-3 "
           >
-            {/* <div
-              onClick={() => {
-                handleCategoryAccordian(categoryItem.title);
-              }}
-            >
-              {console.log(categoryItem)}
-              <span>{categoryItem?.title}</span>
-              <span>({categoryItem?.itemCards.length})</span>
-            </div> */}
-
             <div className="w-full bg-slate-200 h-[1px] flex"></div>
 
             <div
@@ -92,7 +64,6 @@ const RestaurantMenuCategories = ({ menuType }) => {
             <div className={`${isOpen ? "block" : "hidden"} `}>
               {categoryItem?.itemCards.map((item) => {
                 return (
-                  //here that copy sent
                   <div key={item?.card?.info?.id}>
                     <div
                       className={`my-2  justify-between w-full max-w-[90vw] mx-auto p-4 shadow-md rounded-lg ${
@@ -173,7 +144,6 @@ const RestaurantMenuCategories = ({ menuType }) => {
                       <div className=" flex flex-col justify-center items-center gap-1 ">
                         <img
                           className="w-32 h-32 min-w-32 min-h-32  object-cover rounded-lg"
-                          // src={claudinaryImgCDN + item?.card?.info?.imageId}
                           src={
                             !item?.card?.info?.imageId
                               ? "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/Icons-Autosuggest/AS_Cuisine_3x"
@@ -181,10 +151,6 @@ const RestaurantMenuCategories = ({ menuType }) => {
                           }
                         />
 
-                        {/* <img
-                          className="w-32 h-32 min-w-32 min-h-32  object-cover rounded-lg"
-                          src={claudinaryImgCDN + item?.card?.info?.imageId}
-                        /> */}
                         <button className="bg-green-400 px-5 py-1  hidden rounded-md text-white shadow-lg hover:bg-green-600 ">
                           ADD
                         </button>
@@ -195,28 +161,9 @@ const RestaurantMenuCategories = ({ menuType }) => {
                             item?.card?.info?.price / 100 ||
                             item?.card?.info?.defaultPrice / 100
                           }
-                          // itemCount={itemCount}
-                          // setItemCount={setItemCount}
-                          // dispatch={dispatch}
                         />
-                        {/* <div className=" flex items-center   bg-white justify-center rounded-md shadow-lg  ">
-                          <button className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-l-md transition-all">
-                            -
-                          </button>
-                          <p className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg transition-all">
-                            0
-                          </p>
-                          <button className="py-1 px-2 flex justify-center items-center text-green-400 font-semibold text-lg hover:bg-slate-200 rounded-r-md transition-all">
-                            +
-                          </button>
-                        </div> */}
                       </div>
                     </div>
-                    {/* <div
-                      className={`w-full bg-slate-200 h-[1px] ${
-                        isOpen ? "flex" : "hidden"
-                      }`}
-                    ></div> */}
                   </div>
                 );
               })}
@@ -229,74 +176,3 @@ const RestaurantMenuCategories = ({ menuType }) => {
 };
 
 export default RestaurantMenuCategories;
-
-// import React, { useState } from "react";
-// import { claudinaryImgCDN } from "../utils/constants";
-
-// const RestaurantMenuCategories = ({ menuType }) => {
-//   // State to track the open/close state of each category accordion
-//   const [categoryAccordianOpen, setCategoryAccordianOpen] = useState({});
-
-//   // Function to handle clicking on a category accordion
-//   const handleCategoryAccordian = (categoryItemId) => {
-//     // Toggle the open/close state of the clicked category accordion
-//     setCategoryAccordianOpen((prevState) => {
-//       const updatedState = { ...prevState }; // Create a copy of the previous state
-//       updatedState[categoryItemId] = !prevState[categoryItemId]; // Toggle the value for the specific category item
-//       return updatedState; // Return the updated state
-//     });
-//   };
-
-//   return (
-//     <>
-//       {/* Render each category accordion */}
-//       {menuType?.card?.card?.categories.map((categoryItem) => {
-//         const categoryId = categoryItem?.title;
-//         const isOpen = categoryAccordianOpen[categoryId]; // Check if the accordion is open
-
-//         return (
-//           <div key={categoryId} className={`bg-yellow-300`}>
-//             {/* Clickable title of the category accordion */}
-//             <h1 onClick={() => handleCategoryAccordian(categoryId)}>
-//               {categoryItem?.title}
-//             </h1>
-//             {/* Content of the category accordion */}
-//             <div className={`${isOpen ? "flex" : "hidden"}`}>
-//               {categoryItem?.itemCards.map((item) => {
-//                 return (
-//                   <div key={item?.card?.info?.id}>
-//                     {/* Display item details */}
-//                     <div>
-//                       <p>{item?.card?.info?.name}</p>
-//                       <p>
-//                         ₹
-//                         {item?.card?.info?.price / 100 ||
-//                           item?.card?.info?.defaultPrice / 100}
-//                       </p>
-//                       <p>{item?.card?.info?.description}</p>
-//                     </div>
-//                     {/* Display item image and controls */}
-//                     <div>
-//                       <img
-//                         className="w-16"
-//                         src={claudinaryImgCDN + item?.card?.info?.imageId}
-//                       />
-//                       <button>add</button>
-//                       <div>
-//                         <button>-</button>
-//                         <p>0</p>
-//                         <button>+</button>
-//                       </div>
-//                     </div>
-//                   </div>
-//                 );
-//               })}
-//             </div>
-//           </div>
-//         );
-//       })}
-//     </>
-//   );
-// };
-
-// export default RestaurantMenuCategories;

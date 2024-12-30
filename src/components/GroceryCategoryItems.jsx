@@ -16,16 +16,10 @@ const GroceryCategoryItems = () => {
   }, []);
 
   const getCategoryitems = async () => {
-    console.log(
-      "https://thingproxy.freeboard.io/fetch/" +
-        GROCERY_CATEGORY_ITEM_API +
-        categoryName.replace(" ", "%20")
-    );
     const response = await fetch(
       GROCERY_CATEGORY_ITEM_API + categoryName.replace(" ", "%20")
     );
     const data = await response.json();
-    console.log(data);
     setCategoryItem(data);
   };
 
@@ -33,7 +27,6 @@ const GroceryCategoryItems = () => {
     if (categoryItem) {
       categoryItem?.data?.categories.map((item) => {
         if (item?.displayName === categoryName) {
-          console.log(item?.displayName, categoryName);
           setCategoryInfo((prevState) => {
             newState = { ...prevState };
             newState.displayName = item.displayName;

@@ -13,7 +13,6 @@ import CuisineRestSearchCard from "./CuisineRestSearchCard";
 import SearchShimmer from "./SearchShimmer";
 import { useApiUrls } from "../utils/useApiUrls";
 import LoadingGif from "../assets/Food Loader - GIF Animation.gif";
-// import { SEARCH_SUGG_API } from '../constants'
 
 const Search = () => {
   const navigate = useNavigate();
@@ -35,16 +34,6 @@ const Search = () => {
   }, []);
 
   async function getCuisines() {
-    // console.log('https://corsproxy.org/?' + encodeURIComponent(PRE_SEARCH_API))
-    // const response = await fetch('https://corsproxy.org/?' + encodeURIComponent(PRE_SEARCH_API))
-    // const response = await fetch(DEV_API)
-
-    // const response = await fetch('https://thingproxy.freeboard.io/fetch/' + PRE_SEARCH_API)
-    // const response = await fetch("http://localhost:3000/api", {
-    //   method: "POST",
-    //   body: { url: urls?.PRE_SEARCH_API },
-    // });
-
     const response = await fetch(BYPASS_CORS, {
       method: "POST",
       headers: {
@@ -53,21 +42,14 @@ const Search = () => {
       body: JSON.stringify({ url: urls?.PRE_SEARCH_API }),
     });
 
-    console.log(urls?.PRE_SEARCH_API);
-    console.log(response);
-
     const json = await response.json();
-    // console.log(json);
     setPreSearchCuisines(json);
   }
 
   useEffect(() => {
-    // console.log(searchText.length > 1);
-
     setDishes(null);
     setSearchCuisine(null);
     if (searchText.length > 1) {
-      // console.log("if else called");
       const searchTimeOut = setTimeout(() => {
         getSearchSugg();
       }, 300);
@@ -82,12 +64,11 @@ const Search = () => {
       const response = await fetch(BYPASS_CORS, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", // Set the content type
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ url: urls?.SEARCH_DISH_API(dish) }),
       });
       const data = await response.json();
-      // console.log(data?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards);
       setDishes(data?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards);
       setLoading(false);
     } catch (error) {
@@ -102,14 +83,12 @@ const Search = () => {
       const response = await fetch(BYPASS_CORS, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", // Set the content type
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ url: urls?.SEARCH_CUISINE_API(cuisine) }),
       });
       const data = await response.json();
-      console.log(
-        data?.data?.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards
-      );
+
       setSearchCuisine(
         data?.data?.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards
       );
@@ -123,21 +102,16 @@ const Search = () => {
 
   async function getSearchSugg() {
     try {
-      // const response = await fetch(
-      //   "https://thingproxy.freeboard.io/fetch/" +
-      //     `https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.7040592&lng=77.10249019999999&str=${searchText}&trackingId=undefined`
-      // );
       setLoading(true);
       const response = await fetch(BYPASS_CORS, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", // Set the content type
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ url: urls?.SEARCH_SUGG_API(searchText) }),
       });
 
       const json = await response.json();
-      // console.log(json);
       setSugg(json);
 
       setLoading(false);
@@ -153,7 +127,6 @@ const Search = () => {
       gridElements: {
         infoWithStyle: { info },
       },
-      // eslint-disable-next-line no-unsafe-optional-chaining
     } = preSearchCuisines?.data?.cards[1]?.card?.card;
 
     return (
@@ -167,13 +140,6 @@ const Search = () => {
             placeholder="Search for Restaurants and Food"
           />
           {searchText.length > 0 ? (
-            // <p
-
-            //   className="absolute right-[5%] cursor-pointer top-1/2 -translate-y-1/2 "
-            // >
-            //   X
-            // </p>
-
             <svg
               onClick={() => setSearchText("")}
               className="absolute right-4 cursor-pointer top-1/2 w-4 -translate-y-1/2 "
@@ -195,52 +161,11 @@ const Search = () => {
           </div>
         )}
 
-        {/* <DishSearchCard /> */}
         {dishes && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {dishes.map((dish, index) => {
-              // console.log(dish);
               if (index > 0) {
-                // console.log(dish?.card?.card?.restaurant);
-                return (
-                  <DishSearchCard dish={dish} />
-                  // <div className="p-5 bg-gray-300 flexx flex-col gap-6">
-                  //   <div
-                  //     onClick={() =>
-                  //       navigate(
-                  //         `/restaurant/${dish?.card?.card?.restaurant?.info?.id}`
-                  //       )
-                  //     }
-                  //   >
-                  //     <p className="font-bold text-gray-500">
-                  //       By {dish?.card?.card?.restaurant?.info?.name}
-                  //     </p>
-                  //     <p className="text-gray-500">
-                  //       {dish?.card?.card?.restaurant?.info?.avgRating} (
-                  //       {dish?.card?.card?.restaurant?.info?.totalRatingsString}{" "}
-                  //       ratings)
-                  //     </p>
-                  //   </div>
-
-                  //   <div className="w-full h-[1px] bg-slate-400"> </div>
-
-                  //   <div>
-                  //     <p className="text-gray-600 font-bold ">
-                  //       {dish?.card?.card?.info?.name}
-                  //     </p>
-                  //     <img
-                  //       className="rounded-lg w-20"
-                  //       src={claudinaryImgCDN + dish?.card?.card?.info?.imageId}
-                  //     />
-                  //     <FoodBtn
-                  //       item={dish?.card}
-                  //       price={dish?.card?.card?.info?.price / 100}
-                  //       deliveryFee={0}
-                  //     />
-                  //     <p>Rs. {dish?.card?.card?.info?.price / 100}</p>
-                  //   </div>
-                  // </div>
-                );
+                return <DishSearchCard dish={dish} />;
               }
             })}
           </div>
@@ -249,45 +174,8 @@ const Search = () => {
         {searchCuisine && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {searchCuisine.map((cuisineRest) => {
-              return (
-                <CuisineRestSearchCard cuisineRest={cuisineRest} />
-
-                // <div
-                //   onClick={() =>
-                //     navigate(`/restaurant/${cuisineRest?.card?.card?.info?.id}`)
-                //   }
-                //   className="cursor-pointer"
-                // >
-                //   <img
-                //     className="rounded-md w-20 aspect-square object-cover"
-                //     src={
-                //       claudinaryImgCDN +
-                //       cuisineRest?.card?.card?.info?.cloudinaryImageId
-                //     }
-                //   />
-                //   <div>
-                //     <p>{cuisineRest?.card?.card?.info?.name}</p>
-                //     <div>
-                //       <span>
-                //         {" "}
-                //         {cuisineRest?.card?.card?.info?.avgRating ||
-                //           cuisineRest?.card?.card?.info?.avgRatingString}{" "}
-                //         ({cuisineRest?.card?.card?.info?.totalRatingsString}
-                //         ratings)
-                //       </span>
-
-                //       <div>
-                //         {cuisineRest?.card?.card?.info?.cuisines.map(
-                //           (cuisine) => {
-                //             return <span>, {cuisine}</span>;
-                //           }
-                //         )}
-                //       </div>
-                //     </div>
-                //   </div>
-                // </div>
-              );
-            })}{" "}
+              return <CuisineRestSearchCard cuisineRest={cuisineRest} />;
+            })}
           </div>
         )}
 
@@ -298,13 +186,9 @@ const Search = () => {
             }`}
           >
             {sugg.data.suggestions.map((suggestion, index) => {
-              // console.log(suggestion?.metadata);
-              // console.log(suggestion?.metadata?.split(";")[4]?.split(",")[0]);
               return (
                 <div
                   onClick={() => {
-                    // console.log(suggestion?.type);
-
                     if (suggestion?.type == "RESTAURANT") {
                       navigate(
                         `/restaurant/${
@@ -318,7 +202,6 @@ const Search = () => {
                     }
 
                     if (suggestion?.type == "CUISINE") {
-                      console.log("first");
                       getSearchCuisine(suggestion?.text);
                     }
 
@@ -333,7 +216,6 @@ const Search = () => {
                         ? "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/Icons-Autosuggest/AS_Cuisine_3x"
                         : claudinaryImgCDN + suggestion.cloudinaryId
                     }
-                    // src={`${!suggestion.cloudinaryId ? "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/Icons-Autosuggest/AS_Cuisine_3x" : ${claudinaryImgCDN}${suggestion.cloudinaryId}}`}
                     alt="Suggestion"
                     className="w-20 h-20 object-cover rounded-lg"
                   />
@@ -356,7 +238,6 @@ const Search = () => {
 
           <div className="flex  overflow-scroll overflow-y-hidden">
             {info.map((searchCuisine) => {
-              // console.log(searchCuisine.entityId);
               return (
                 <img
                   onClick={() =>

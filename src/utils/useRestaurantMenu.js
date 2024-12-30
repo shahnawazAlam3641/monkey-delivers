@@ -13,14 +13,10 @@ const useRestaurantMenu = (resId) => {
   }, []);
 
   const getMenu = async () => {
-    // console.log('menu effect called')
-    // const response = await fetch(
-    //   "https://thingproxy.freeboard.io/fetch/" + RESTAURANT_MENU_API + resId
-    // );
     const response = await fetch(BYPASS_CORS, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", // Set the content type
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ url: urls?.RESTAURANT_MENU_API(resId) }),
     });

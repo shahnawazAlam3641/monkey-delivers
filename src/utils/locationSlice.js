@@ -16,14 +16,11 @@ const locationSlice = createSlice({
     setLocation: (state, action) => {
       const { lat, long, address } = action.payload;
 
-      // console.log({ lat, long, address });
-
       state.lat = lat;
       state.long = long;
 
       state.address.main_text = address.main_text;
       state.address.secondary_text = address.secondary_text;
-      console.log("updated success");
     },
   },
 });

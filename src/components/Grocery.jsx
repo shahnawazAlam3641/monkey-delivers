@@ -15,15 +15,10 @@ const Grocery = () => {
   }, []);
 
   const getGroceryHome = async () => {
-    // const response = await fetch(
-    //   "https://thingproxy.freeboard.io/fetch/" + GROCERY_HOME_API
-    // );
-
     const response = await fetch(GROCERY_HOME_API);
 
     const data = await response.json();
     setGroceryHome(data);
-    console.log(data);
   };
 
   if (!groceryHome) return <h1> Loading............</h1>;
@@ -32,8 +27,6 @@ const Grocery = () => {
     widgetInfo: { title },
     data,
   } = groceryHome?.data?.widgets[1];
-
-  console.log(groceryHome?.data?.widgets[2]?.data);
 
   return (
     <div>
