@@ -1,11 +1,10 @@
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { useState } from "react";
-import LocationSidebar from "./LocationSidebar";
+import LocationSidebar from "../common/LocationSidebar";
+
 const Header = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartItems = useSelector((store) => {
     return store.cart.items;

@@ -1,18 +1,13 @@
 import { useState, useEffect } from "react";
 const BYPASS_CORS = import.meta.env.VITE_BYPASS_CORS_URL;
-import {
-  PRE_SEARCH_API,
-  SEARCH_CUISINE_API,
-  SEARCH_DISH_API,
-} from "../utils/constants";
-import { claudinaryImgCDN } from "../utils/constants";
-import { Link, useNavigate } from "react-router-dom";
-import FoodBtn from "./FoodBtn";
-import DishSearchCard from "./DishSearchCard";
-import CuisineRestSearchCard from "./CuisineRestSearchCard";
-import SearchShimmer from "./SearchShimmer";
-import { useApiUrls } from "../utils/useApiUrls";
-import LoadingGif from "../assets/Food Loader - GIF Animation.gif";
+
+import { claudinaryImgCDN } from "../../utils/constants";
+import { useNavigate } from "react-router-dom";
+import DishSearchCard from "../common/DishSearchCard";
+import CuisineRestSearchCard from "../common/CuisineRestSearchCard";
+import SearchShimmer from "../shimmer/SearchShimmer";
+import { useApiUrls } from "../../utils/useApiUrls";
+import LoadingGif from "../../assets/Food Loader - GIF Animation.gif";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -24,6 +19,24 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
 
   const urls = useApiUrls();
+
+  const handleSuggCardClick = (suggestion) => {
+    if (suggestion?.type == "RESTAURANT") {
+      navigate(
+        `/restaurant/${suggestion?.metadata?.split(":")[4]?.split(",")[0]}`
+      );
+    }
+
+    if (suggestion?.type == "DISH") {
+      getDishes(suggestion?.text);
+    }
+
+    if (suggestion?.type == "CUISINE") {
+      getSearchCuisine(suggestion?.text);
+    }
+
+    setSugg(null);
+  };
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -37,7 +50,7 @@ const Search = () => {
     const response = await fetch(BYPASS_CORS, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", // Set the content type
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ url: urls?.PRE_SEARCH_API }),
     });
@@ -174,7 +187,12 @@ const Search = () => {
         {searchCuisine && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {searchCuisine.map((cuisineRest) => {
-              return <CuisineRestSearchCard cuisineRest={cuisineRest} />;
+              return (
+                <CuisineRestSearchCard
+                  key={cuisineRest?.card?.card?.info?.id}
+                  cuisineRest={cuisineRest}
+                />
+              );
             })}
           </div>
         )}
@@ -189,23 +207,7 @@ const Search = () => {
               return (
                 <div
                   onClick={() => {
-                    if (suggestion?.type == "RESTAURANT") {
-                      navigate(
-                        `/restaurant/${
-                          suggestion?.metadata?.split(":")[4]?.split(",")[0]
-                        }`
-                      );
-                    }
-
-                    if (suggestion?.type == "DISH") {
-                      getDishes(suggestion?.text);
-                    }
-
-                    if (suggestion?.type == "CUISINE") {
-                      getSearchCuisine(suggestion?.text);
-                    }
-
-                    setSugg(null);
+                    handleSuggCardClick(suggestion);
                   }}
                   key={index}
                   className="w-[80%] flex gap-4 p-2 cursor-pointer transition-all duration-200 hover:bg-slate-200 rounded-md"

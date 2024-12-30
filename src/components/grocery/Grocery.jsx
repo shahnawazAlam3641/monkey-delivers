@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { GROCERY_HOME_API } from "../utils/constants";
+import { useState, useEffect } from "react";
+import { GROCERY_HOME_API } from "../../utils/constants";
 import GroceryNav from "./GroceryNav";
 import GroceryCategoryCard from "./GroceryCategoryCard";
 import { Link } from "react-router-dom";
-import { useApiUrls } from "../utils/useApiUrls";
+import { useApiUrls } from "../../utils/useApiUrls";
 
 const Grocery = () => {
   const [groceryHome, setGroceryHome] = useState(null);
@@ -35,9 +35,9 @@ const Grocery = () => {
       <div className="w-[900px] max-w-[90%] mx-auto p-2 ">
         <h1 className="text-lg font-semibold">{title}</h1>
         <div className="flex flex-wrap gap-4 ">
-          {data.map((card) => {
+          {data.map((card, index) => {
             return (
-              <Link to={"/grocery/category/" + card?.displayName}>
+              <Link key={index} to={"/grocery/category/" + card?.displayName}>
                 <GroceryCategoryCard card={card} />
               </Link>
             );

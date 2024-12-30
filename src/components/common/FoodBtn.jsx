@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, removeItem } from "../utils/cartSlice";
+import { addItem, removeItem } from "../../utils/cartSlice";
 
 const FoodBtn = ({ item, price, deliveryFee }) => {
   item.itemPrice = price;

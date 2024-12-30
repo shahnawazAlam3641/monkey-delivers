@@ -3,18 +3,18 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import CuisineCollection from "./components/CuisineCollection.jsx";
-import RestaurantMenu from "./components/RestaurantMenu.jsx";
-import Login from "./components/Login.jsx";
-import Cart from "./components/Cart.jsx";
-import Help from "./components/Help.jsx";
-import Search from "./components/Search.jsx";
-import Body from "./components/Body.jsx";
-import Error from "./components/Error.jsx";
+import CuisineCollection from "./components/pages/CuisineCollection.jsx";
+import RestaurantMenu from "./components/pages/RestaurantMenu.jsx";
+import Login from "./components/pages/Login.jsx";
+import Cart from "./components/pages/Cart.jsx";
+import Help from "./components/pages/Help.jsx";
+import Search from "./components/pages/Search.jsx";
+import Body from "./components/pages/Body.jsx";
+import Error from "./components/pages/Error.jsx";
 
-const Grocery = lazy(() => import("./components/Grocery"));
+const Grocery = lazy(() => import("./components/grocery/Grocery"));
 const GroceryCategoryItems = lazy(() =>
-  import("./components/GroceryCategoryItems")
+  import("./components/grocery/GroceryCategoryItems")
 );
 
 const appRouter = createBrowserRouter([

@@ -1,5 +1,5 @@
-import HeroSection from "./HeroSection";
-import Cuisines from "./Cuisines";
+import HeroSection from "../common/HeroSection";
+import Cuisines from "../common/Cuisines";
 
 const Body = () => {
   return (

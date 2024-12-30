@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import {
   GROCERY_CATEGORY_ITEM_API,
   claudinaryImgCDN,
-} from "../utils/constants";
+} from "../../utils/constants";
 
 const GroceryCategoryItems = () => {
   const [categoryItem, setCategoryItem] = useState();

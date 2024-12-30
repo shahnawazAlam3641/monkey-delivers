@@ -1,5 +1,5 @@
 import React from "react";
-import { claudinaryImgCDN } from "../utils/constants";
+import { claudinaryImgCDN } from "../../utils/constants";
 import FoodBtn from "./FoodBtn";
 
 const RestaurantMenuCarousel = ({ menuType }) => {

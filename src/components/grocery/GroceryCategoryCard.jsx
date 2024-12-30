@@ -1,5 +1,5 @@
 import React from "react";
-import { claudinaryImgCDN } from "../utils/constants";
+import { claudinaryImgCDN } from "../../utils/constants";
 
 const GroceryCategoryCard = ({ card }) => {
   //   console.log(props);

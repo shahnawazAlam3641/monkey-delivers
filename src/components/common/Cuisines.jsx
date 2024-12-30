@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { MAIN_API, CUISINE_IMG_CDN } from "../utils/constants";
+import { useEffect, useState } from "react";
+import { CUISINE_IMG_CDN } from "../../utils/constants";
 import RestaurantChains from "./RestaurantChains";
-import useOnlineStatus from "../utils/useOnlineStatus";
+import useOnlineStatus from "../../utils/useOnlineStatus";
 import { useNavigate } from "react-router-dom";
-import { useApiUrls } from "../utils/useApiUrls";
+import { useApiUrls } from "../../utils/useApiUrls";
 import { useSelector } from "react-redux";
-import ShimmerCard from "./ShimmerCard";
+import ShimmerCard from "../shimmer/ShimmerCard";
 const BYPASS_CORS = import.meta.env.VITE_BYPASS_CORS_URL;
 
 const Cuisines = () => {

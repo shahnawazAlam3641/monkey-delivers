@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import RestaurantCard from "./RestaurantCard";
-import { useApiUrls } from "../utils/useApiUrls";
-import ShimmerCard from "./ShimmerCard";
+import RestaurantCard from "../common/RestaurantCard";
+import { useApiUrls } from "../../utils/useApiUrls";
+import ShimmerCard from "../shimmer/ShimmerCard";
 
 const BYPASS_CORS = import.meta.env.VITE_BYPASS_CORS_URL;
 
@@ -45,7 +45,6 @@ const CuisineCollection = () => {
   if (cuisineCollection.length == 0) {
     return (
       <div className="w-[80%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-[90%] mx-auto">
-        {" "}
         {Array.from(Array(12)).map((n, index) => {
           return <ShimmerCard key={index} />;
         })}{" "}
