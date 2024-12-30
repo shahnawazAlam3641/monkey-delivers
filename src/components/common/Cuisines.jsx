@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useApiUrls } from "../../utils/useApiUrls";
 import { useSelector } from "react-redux";
 import ShimmerCard from "../shimmer/ShimmerCard";
+import toast from "react-hot-toast";
 const BYPASS_CORS = import.meta.env.VITE_BYPASS_CORS_URL;
 
 const Cuisines = () => {
@@ -23,6 +24,7 @@ const Cuisines = () => {
   }, [location]);
 
   async function getCuisines() {
+    const toastId = toast.loading("It may take some time.");
     try {
       const response = await fetch(BYPASS_CORS, {
         method: "POST",
@@ -34,8 +36,12 @@ const Cuisines = () => {
 
       const json = await response.json();
       setCuisines(json);
+
+      toast.dismiss(toastId);
     } catch (error) {
       console.log(error);
+      toast.dismiss(toastId);
+      toast.error("Something went wrong");
     }
   }
 

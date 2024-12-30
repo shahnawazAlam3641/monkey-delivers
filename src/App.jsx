@@ -4,6 +4,7 @@ import Header from "./components/common/Header";
 import appStore from "./utils/appStore";
 import { Outlet } from "react-router-dom";
 import Footer from "./components/common/Footer";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Outlet />
       </div>
       <Footer />
+      <Toaster />
     </Provider>
   );
 }

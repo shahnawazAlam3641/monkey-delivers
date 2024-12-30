@@ -1,4 +1,3 @@
-import React from "react";
 import CircleRupee from "../svg/CircleRupee";
 
 const RestaurantMenuHeader = ({ menu }) => {

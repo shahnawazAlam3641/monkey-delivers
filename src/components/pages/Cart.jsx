@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, removeItem } from "../../utils/cartSlice";
+import { addItem, clearCart, removeItem } from "../../utils/cartSlice";
 import EmptyCart from "../common/EmptyCart";
+import Dustbin from "../svg/Dustbin";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -82,6 +83,13 @@ const Cart = () => {
               </div>
             );
           })}
+        </div>
+        <div
+          onClick={() => dispatch(clearCart())}
+          title="Clear Cart"
+          className=" self-end hover:scale-95 transition-all duration-200 cursor-pointer"
+        >
+          <Dustbin />
         </div>
 
         <input

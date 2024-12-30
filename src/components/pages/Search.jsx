@@ -178,7 +178,12 @@ const Search = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {dishes.map((dish, index) => {
               if (index > 0) {
-                return <DishSearchCard dish={dish} />;
+                return (
+                  <DishSearchCard
+                    key={dish?.card?.card?.info?.id}
+                    dish={dish}
+                  />
+                );
               }
             })}
           </div>

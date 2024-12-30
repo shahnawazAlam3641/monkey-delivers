@@ -33,8 +33,8 @@ const CuisineRestSearchCard = ({ cuisineRest }) => {
           </p>
         </div>
         <p className="text-gray-400 font-semibold text-sm">
-          {cuisineRest?.card?.card?.info?.cuisines.map((cuisine) => {
-            return <span> {cuisine},</span>;
+          {cuisineRest?.card?.card?.info?.cuisines.map((cuisine, index) => {
+            return <span key={index}> {cuisine},</span>;
           })}
         </p>
       </div>
